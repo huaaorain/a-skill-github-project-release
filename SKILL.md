@@ -60,6 +60,8 @@ For a first upload, follow the confirmation and git setup sequence in `reference
 
 The version must be unambiguous before editing release files. Prefer Semantic Versioning unless the project already uses a different scheme. Reject an existing tag or release instead of reusing or moving it.
 
+For a project's first public release, use `0.1.0` by default. Do not silently promote an initial release to `1.0.0`; change `release.initial_version` only when the user explicitly requests another starting version.
+
 ### 4. Prepare project documents
 
 Build a real feature introduction with at least one local image under `docs/assets/`. Explain what is visible and tie every image to a real feature, workflow, interface, or architecture component.

@@ -8,7 +8,8 @@ Use this flow only when no target GitHub repository exists.
 2. Confirm the project has an appropriate `.gitignore`, README, license status, and no secrets or personal runtime data.
 3. Confirm the repository owner, name, visibility, description, homepage, and topics with the user.
 4. Confirm that executables and distributable extensions will be Release assets, not Git files.
-5. Initialize `.github/release-spec.json` if needed:
+5. Start the first public release at `0.1.0` unless the user explicitly chooses another initial version. Never assume `1.0.0`.
+6. Initialize `.github/release-spec.json` if needed:
 
    ```powershell
    python "$SkillDir/scripts/release_manager.py" init --root PROJECT_ROOT --repo OWNER/REPO

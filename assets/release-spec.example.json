@@ -9,6 +9,7 @@
   },
   "release": {
     "tag_prefix": "v",
+    "initial_version": "0.1.0",
     "draft": true,
     "prerelease": false
   },
