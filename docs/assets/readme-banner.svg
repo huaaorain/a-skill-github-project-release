@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="360" viewBox="0 0 1200 360" role="img" aria-labelledby="title desc">
+  <title id="title">GitHub Project Release</title>
+  <desc id="desc">A controlled workflow from finished project to published GitHub release</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#101614"/>
+      <stop offset="0.62" stop-color="#18241f"/>
+      <stop offset="1" stop-color="#0d1211"/>
+    </linearGradient>
+    <linearGradient id="line" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ff7a45"/>
+      <stop offset="1" stop-color="#c5f36b"/>
+    </linearGradient>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M32 0H0V32" fill="none" stroke="#fff" stroke-opacity=".035"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="360" rx="28" fill="url(#bg)"/>
+  <rect width="1200" height="360" rx="28" fill="url(#grid)"/>
+  <circle cx="1070" cy="36" r="160" fill="#c5f36b" fill-opacity=".06"/>
+  <g font-family="Segoe UI, Microsoft YaHei UI, Noto Sans CJK SC, sans-serif">
+    <text x="64" y="70" fill="#c5f36b" font-size="16" font-weight="700" letter-spacing="4">SOURCE → VERIFY → DRAFT → RELEASE</text>
+    <text x="64" y="148" fill="#f6f2e8" font-size="58" font-weight="760" letter-spacing="-2">GITHUB PROJECT</text>
+    <text x="64" y="210" fill="#f6f2e8" font-size="58" font-weight="760" letter-spacing="-2">RELEASE</text>
+    <text x="66" y="262" fill="#aebbb5" font-size="20">从完成的项目到可追溯、可恢复的 GitHub 发布。</text>
+    <path d="M64 305H520" fill="none" stroke="url(#line)" stroke-width="4" stroke-linecap="round"/>
+  </g>
+  <g transform="translate(690 68)" font-family="Segoe UI, Microsoft YaHei UI, Noto Sans CJK SC, sans-serif">
+    <rect width="430" height="224" rx="24" fill="#1b2722" stroke="#fff" stroke-opacity=".09"/>
+    <g font-size="14" font-weight="700" letter-spacing="1.4">
+      <rect x="24" y="24" width="382" height="40" rx="10" fill="#111816"/>
+      <circle cx="43" cy="44" r="7" fill="#ff7a45"/>
+      <text x="62" y="50" fill="#d9e2dd">RELEASE PLAN / VERIFIED</text>
+      <rect x="24" y="86" width="174" height="48" rx="12" fill="#22372e"/>
+      <text x="44" y="115" fill="#c5f36b">SOURCE</text>
+      <rect x="232" y="86" width="174" height="48" rx="12" fill="#22372e"/>
+      <text x="252" y="115" fill="#c5f36b">ASSETS</text>
+      <rect x="24" y="150" width="382" height="46" rx="10" fill="#111816"/>
+      <text x="44" y="178" fill="#adbab4">MANIFEST · HASH · NOTES</text>
+    </g>
+    <path d="M206 110H232" stroke="#ff9c73" stroke-width="3"/>
+    <path d="M24 202H406" stroke="url(#line)" stroke-width="4" stroke-linecap="round"/>
+  </g>
+  <g fill="#71817a" font-family="Segoe UI, Microsoft YaHei UI, Noto Sans CJK SC, sans-serif" font-size="14">
+    <text x="64" y="335">GitHub API · deterministic manifests · draft-first publishing</text>
+    <text x="1132" y="335" text-anchor="end">v1.0.0</text>
+  </g>
+</svg>

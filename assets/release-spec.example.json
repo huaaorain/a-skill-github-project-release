@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "project": {
+    "name": "Example Project",
+    "description": "One sentence describing the product and its target user.",
+    "repository": "owner/repository",
+    "homepage": "",
+    "topics": []
+  },
+  "release": {
+    "tag_prefix": "v",
+    "draft": true,
+    "prerelease": false
+  },
+  "artifact_policy": "release-only",
+  "readme": {
+    "path": "README.md",
+    "locales": [
+      {
+        "path": "README.md",
+        "label": "English",
+        "catalog_labels": {
+          "latest": "Latest",
+          "version": "Version",
+          "published": "Published",
+          "release_notes": "Release notes",
+          "downloads": "All version downloads",
+          "open": "Open",
+          "source_zip": "Source code (zip)",
+          "source_tar": "Source code (tar.gz)"
+        }
+      }
+    ],
+    "catalog_start": "<!-- release-catalog:start -->",
+    "catalog_end": "<!-- release-catalog:end -->"
+  },
+  "screenshots": [
+    {
+      "path": "docs/assets/main-ui.png",
+      "description": "Main workflow shown with non-sensitive demo data."
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "release-build/example-win-x64.zip",
+      "role": "standard",
+      "description": "Portable Windows application archive.",
+      "required": true,
+      "download_name": "Example-Project-win-x64.zip"
+    }
+  ]
+}

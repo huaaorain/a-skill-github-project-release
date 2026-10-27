@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" role="img" aria-labelledby="title desc">
+  <title id="title">GitHub Project Release workflow</title>
+  <desc id="desc">Build and test, prepare documentation, verify commit, draft release, publish, and refresh the release catalog.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f8f5ed"/>
+      <stop offset="1" stop-color="#eaf1e8"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ff7a45"/>
+      <stop offset="1" stop-color="#8bcf32"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-30%" width="140%" height="170%">
+      <feDropShadow dx="0" dy="9" stdDeviation="12" flood-color="#1e2b25" flood-opacity=".12"/>
+    </filter>
+  </defs>
+  <rect width="1200" height="560" rx="28" fill="url(#bg)"/>
+  <g font-family="Segoe UI, Microsoft YaHei UI, Noto Sans CJK SC, sans-serif">
+    <text x="64" y="68" fill="#1e2b25" font-size="15" font-weight="750" letter-spacing="4">CONTROLLED RELEASE WORKFLOW</text>
+    <text x="64" y="120" fill="#17231e" font-size="38" font-weight="760">源码、附件、标签和说明保持一致</text>
+    <line x1="64" y1="146" x2="302" y2="146" stroke="url(#accent)" stroke-width="4" stroke-linecap="round"/>
+  </g>
+  <g filter="url(#shadow)" font-family="Segoe UI, Microsoft YaHei UI, Noto Sans CJK SC, sans-serif">
+    <rect x="64" y="190" width="190" height="270" rx="22" fill="#fffdf8" stroke="#d9e1d9"/>
+    <circle cx="104" cy="230" r="18" fill="#ff7a45"/>
+    <text x="104" y="236" fill="#fff" font-size="17" font-weight="800" text-anchor="middle">01</text>
+    <text x="134" y="236" fill="#17231e" font-size="21" font-weight="750">构建与测试</text>
+    <text x="90" y="280" fill="#5e6d65" font-size="15">运行项目测试</text>
+    <text x="90" y="307" fill="#5e6d65" font-size="15">生成分发文件</text>
+    <text x="90" y="359" fill="#809087" font-size="14">确定 commit</text>
+    <text x="90" y="383" fill="#809087" font-size="14">拒绝已知失败</text>
+    <rect x="90" y="410" width="138" height="28" rx="14" fill="#f1f5ef"/>
+    <text x="159" y="429" fill="#34483f" font-size="12" font-weight="700" text-anchor="middle">BUILD GATE</text>
+
+    <rect x="278" y="190" width="190" height="270" rx="22" fill="#fffdf8" stroke="#d9e1d9"/>
+    <circle cx="318" cy="230" r="18" fill="#ff9868"/>
+    <text x="318" y="236" fill="#fff" font-size="17" font-weight="800" text-anchor="middle">02</text>
+    <text x="348" y="236" fill="#17231e" font-size="21" font-weight="750">文档与图片</text>
+    <text x="304" y="280" fill="#5e6d65" font-size="15">README 与多语言</text>
+    <text x="304" y="307" fill="#5e6d65" font-size="15">功能介绍与截图</text>
+    <text x="304" y="359" fill="#809087" font-size="14">生成文件清单</text>
+    <text x="304" y="383" fill="#809087" font-size="14">检查配置和安全</text>
+    <rect x="304" y="410" width="138" height="28" rx="14" fill="#f1f5ef"/>
+    <text x="373" y="429" fill="#34483f" font-size="12" font-weight="700" text-anchor="middle">DOCS GATE</text>
+
+    <rect x="492" y="190" width="190" height="270" rx="22" fill="#fffdf8" stroke="#d9e1d9"/>
+    <circle cx="532" cy="230" r="18" fill="#abd568"/>
+    <text x="532" y="236" fill="#fff" font-size="17" font-weight="800" text-anchor="middle">03</text>
+    <text x="562" y="236" fill="#17231e" font-size="21" font-weight="750">校验与预检</text>
+    <text x="518" y="280" fill="#5e6d65" font-size="15">SHA-256 与清单</text>
+    <text x="518" y="307" fill="#5e6d65" font-size="15">Release 正文</text>
+    <text x="518" y="359" fill="#809087" font-size="14">标签冲突检查</text>
+    <text x="518" y="383" fill="#809087" font-size="14">敏感信息扫描</text>
+    <rect x="518" y="410" width="138" height="28" rx="14" fill="#f1f5ef"/>
+    <text x="587" y="429" fill="#34483f" font-size="12" font-weight="700" text-anchor="middle">ASSET GATE</text>
+
+    <rect x="706" y="190" width="190" height="270" rx="22" fill="#fffdf8" stroke="#d9e1d9"/>
+    <circle cx="746" cy="230" r="18" fill="#83c747"/>
+    <text x="746" y="236" fill="#fff" font-size="17" font-weight="800" text-anchor="middle">04</text>
+    <text x="776" y="236" fill="#17231e" font-size="21" font-weight="750">Draft Release</text>
+    <text x="732" y="280" fill="#5e6d65" font-size="15">创建确定标签</text>
+    <text x="732" y="307" fill="#5e6d65" font-size="15">上传完整附件</text>
+    <text x="732" y="359" fill="#809087" font-size="14">验证大小与链接</text>
+    <text x="732" y="383" fill="#809087" font-size="14">人工确认发布</text>
+    <rect x="732" y="410" width="138" height="28" rx="14" fill="#f1f5ef"/>
+    <text x="801" y="429" fill="#34483f" font-size="12" font-weight="700" text-anchor="middle">PUBLISH GATE</text>
+
+    <rect x="920" y="190" width="216" height="270" rx="22" fill="#17231e" stroke="#263b31"/>
+    <circle cx="960" cy="230" r="18" fill="#c5f36b"/>
+    <text x="960" y="236" fill="#17231e" font-size="17" font-weight="800" text-anchor="middle">05</text>
+    <text x="990" y="236" fill="#f7f4ec" font-size="21" font-weight="750">同步项目页</text>
+    <text x="946" y="280" fill="#b2c0b8" font-size="15">刷新全部版本目录</text>
+    <text x="946" y="307" fill="#b2c0b8" font-size="15">同步本地化 README</text>
+    <text x="946" y="359" fill="#809087" font-size="14">保留历史链接</text>
+    <text x="946" y="383" fill="#809087" font-size="14">输出可审计结果</text>
+    <rect x="946" y="410" width="164" height="28" rx="14" fill="#21352c"/>
+    <text x="1028" y="429" fill="#c5f36b" font-size="12" font-weight="700" text-anchor="middle">CATALOG READY</text>
+  </g>
+  <g stroke="#95a39b" stroke-width="3">
+    <path d="M254 325H278"/><path d="M468 325H492"/><path d="M682 325H706"/><path d="M896 325H920"/>
+  </g>
+  <g fill="#95a39b">
+    <path d="M271 319L279 325L271 331Z"/><path d="M485 319L493 325L485 331Z"/>
+    <path d="M699 319L707 325L699 331Z"/><path d="M913 319L921 325L913 331Z"/>
+  </g>
+  <text x="64" y="515" fill="#7a8980" font-size="14">发布失败时保留 Draft 或局部产物，不以覆盖标签、强制推送或删除附件恢复。</text>
+</svg>
