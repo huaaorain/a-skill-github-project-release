@@ -292,6 +292,22 @@ class ReleaseManagerSmokeTests(unittest.TestCase):
             release = release_manager.find_release("example/demo", "v1.0.0")
         self.assertEqual(release["id"], 42)
 
+    def test_asset_download_requests_binary_media_type(self) -> None:
+        response = mock.MagicMock()
+        response.read.return_value = b"manifest"
+        response.__enter__.return_value = response
+        with (
+            mock.patch.object(release_manager.urllib.request, "urlopen", return_value=response) as request,
+            mock.patch.object(release_manager, "github_token", return_value="test-token"),
+        ):
+            data = release_manager.api_download(
+                "https://api.github.com/repos/example/demo/releases/assets/1",
+                accept="application/octet-stream",
+            )
+        self.assertEqual(data, b"manifest")
+        prepared = request.call_args.args[0]
+        self.assertEqual(prepared.get_header("Accept"), "application/octet-stream")
+
 
 if __name__ == "__main__":
     unittest.main()

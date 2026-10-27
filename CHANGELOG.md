@@ -1,12 +1,22 @@
 # Changelog
 
-## [1.0.1] - 2026-10-27
+## [1.0.2] - 2026-10-27
 
 ### Fixed
+
+- Download Draft Release metadata through the authenticated Release Asset API.
+- Verify publish-time asset sizes without relying on temporary `untagged-*`
+  browser download URLs.
+
+## [1.0.1] - 2026-10-27
+
+### Internal draft
 
 - Find authenticated Draft Releases through the release list instead of the
   by-tag endpoint, which does not return drafts.
 - Added an offline regression test for draft discovery.
+
+This draft was superseded by `1.0.2` after Draft asset retrieval was corrected.
 
 ## [1.0.0] - 2026-10-27
 

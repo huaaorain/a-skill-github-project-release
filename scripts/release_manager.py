@@ -244,8 +244,11 @@ def api_request(
         fail(f"GitHub API request failed: {exc.reason}")
 
 
-def api_download(url: str) -> bytes:
-    headers = {"User-Agent": "github-project-release-skill"}
+def api_download(url: str, *, accept: str = "application/vnd.github+json") -> bytes:
+    headers = {
+        "User-Agent": "github-project-release-skill",
+        "Accept": accept,
+    }
     token = github_token()
     if token:
         headers["Authorization"] = f"Bearer {token}"
@@ -943,7 +946,13 @@ def publish_release(args: argparse.Namespace) -> None:
     missing_metadata = sorted(required_metadata - set(assets))
     if missing_metadata:
         fail("Draft release is missing metadata assets: " + ", ".join(missing_metadata))
-    manifest = json.loads(api_download(assets["release-manifest.json"]["browser_download_url"]))
+    manifest_asset = assets["release-manifest.json"]
+    manifest = json.loads(
+        api_download(
+            manifest_asset.get("url") or manifest_asset["browser_download_url"],
+            accept="application/octet-stream",
+        )
+    )
     if manifest.get("tag") != args.tag:
         fail("Draft release manifest tag does not match the release tag")
     missing_artifacts = []

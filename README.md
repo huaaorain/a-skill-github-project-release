@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-1.0.1-ff7a45?style=flat-square" alt="Version 1.0.1">
+  <img src="https://img.shields.io/badge/version-1.0.2-ff7a45?style=flat-square" alt="Version 1.0.2">
   <img src="https://img.shields.io/badge/python-3.10%2B-3776ab?style=flat-square&logo=python&logoColor=white" alt="Python 3.10+">
   <img src="https://img.shields.io/badge/platform-GitHub-111816?style=flat-square&logo=github&logoColor=white" alt="GitHub">
   <img src="https://img.shields.io/badge/policy-release--only-c5f36b?style=flat-square" alt="Release-only">
@@ -186,7 +186,7 @@ github-project-release/
 
 ## 更新记录
 
-- [1.0.1：首个公开版本](docs/releases/v1.0.1.md)
+- [1.0.2：首个公开版本](docs/releases/v1.0.2.md)
 
 ## 所有版本
 
