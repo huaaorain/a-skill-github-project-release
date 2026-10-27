@@ -1,9 +1,9 @@
 ---
-name: github-project-release
+name: a-skill-github-project-release
 description: Publish a finished project to GitHub or an existing repository, build versioned release assets, generate a screenshot-based project README, and maintain release notes and download catalogs. Use for first-time GitHub uploads, new releases, or release documentation refreshes; not for unrelated Git maintenance.
 ---
 
-# GitHub Project Release
+# A Skill: Github Project Release
 
 Publish source code to Git, keep executables and distributable extensions in GitHub Releases, and leave the repository with a complete project page and version archive.
 
@@ -25,7 +25,7 @@ Authentication for GitHub API operations comes from `GITHUB_TOKEN` or `GH_TOKEN`
 `SKILL_DIR` below means the absolute directory containing this `SKILL.md`. In PowerShell, set it before running helpers:
 
 ```powershell
-$SkillDir = "C:\path\to\github-project-release"
+$SkillDir = "C:\path\to\a-skill-github-project-release"
 python "$SkillDir\scripts\release_manager.py" --help
 ```
 

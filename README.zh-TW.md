@@ -1,8 +1,8 @@
 <p align="center">
-  <img src="docs/assets/readme-banner.svg" alt="GitHub Project Release skill" width="100%">
+  <img src="docs/assets/readme-banner.svg" alt="A Skill: Github Project Release skill" width="100%">
 </p>
 
-<h1 align="center">GitHub Project Release</h1>
+<h1 align="center">A Skill: Github Project Release</h1>
 
 <p align="center">
   <strong>把完成的專案整理成可發佈、可追溯、可恢復的 GitHub 倉庫與版本。</strong>
@@ -24,7 +24,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/huaaorain/github-project-release/releases/latest"><strong>下載最新版本</strong></a>
+  <a href="https://github.com/huaaorain/a-skill-github-project-release/releases/latest"><strong>下載最新版本</strong></a>
   ·
   <a href="#核心能力">核心能力</a>
   ·
@@ -34,7 +34,7 @@
   ·
   <a href="#所有版本">所有版本</a>
   ·
-  <a href="https://github.com/huaaorain/github-project-release/issues">回報問題</a>
+  <a href="https://github.com/huaaorain/a-skill-github-project-release/issues">回報問題</a>
 </p>
 
 ---
@@ -50,7 +50,7 @@
 - 歷史版本下載入口逐漸失效；
 - 多語言 README 在版本發佈後失去同步。
 
-**GitHub Project Release** 將這些步驟整理成受控流程，預設將原始碼放入 Git，而可執行檔與分發檔案只上傳到 Release。
+**A Skill: Github Project Release** 將這些步驟整理成受控流程，預設將原始碼放入 Git，而可執行檔與分發檔案只上傳到 Release。
 
 ## 核心能力
 
@@ -91,7 +91,7 @@
 
 ## 發佈流程
 
-![GitHub Project Release workflow](docs/assets/release-flow.svg)
+![A Skill: Github Project Release workflow](docs/assets/release-flow.svg)
 
 _上圖描述專案實際的發佈流程，不是軟體介面截圖。_
 
@@ -102,37 +102,37 @@ _上圖描述專案實際的發佈流程，不是軟體介面截圖。_
 將本倉庫複製或解壓到：
 
 ```text
-${CODEX_HOME}/skills/github-project-release
+${CODEX_HOME}/skills/a-skill-github-project-release
 ```
 
 Windows 預設位置通常是：
 
 ```text
-C:\Users\<USER>\.codex\skills\github-project-release
+C:\Users\<USER>\.codex\skills\a-skill-github-project-release
 ```
 
 重新開啟 Codex 後，可明確呼叫：
 
 ```text
-$github-project-release
+$a-skill-github-project-release
 ```
 
-或從 Releases 下載 `github-project-release.zip`，解壓後將整個 `github-project-release/` 目錄放入 skills 路徑。不要只複製 `SKILL.md`，腳本、範本與參考文件都屬於工作流程的一部分。
+或從 Releases 下載 `github-project-release.zip`，解壓後將整個 `a-skill-github-project-release/` 目錄放入 skills 路徑。不要只複製 `SKILL.md`，腳本、範本與參考文件都屬於工作流程的一部分。
 
 ## 使用方式
 
 在專案完成程式碼、測試與建置後，對 Codex 說：
 
 ```text
-使用 $github-project-release 把這個專案發佈到 GitHub。
+使用 $a-skill-github-project-release 把這個專案發佈到 GitHub。
 ```
 
 也可以指定場景：
 
 ```text
-使用 $github-project-release 為 v0.2.0 建立 Draft Release。
-使用 $github-project-release 更新 README 與三語版本目錄。
-使用 $github-project-release 只更新既有 Release 的說明，不修改附件。
+使用 $a-skill-github-project-release 為 v0.2.0 建立 Draft Release。
+使用 $a-skill-github-project-release 更新 README 與三語版本目錄。
+使用 $a-skill-github-project-release 只更新既有 Release 的說明，不修改附件。
 ```
 
 ## 安全邊界
@@ -169,7 +169,7 @@ python .\scripts\release_manager.py --help
 ## 專案結構
 
 ```text
-github-project-release/
+a-skill-github-project-release/
 ├─ SKILL.md
 ├─ agents/
 ├─ assets/
@@ -196,25 +196,25 @@ github-project-release/
 ## 所有版本
 
 <!-- release-catalog:start -->
-最新版本: [GitHub Project Release 0.1.0](https://github.com/huaaorain/github-project-release/releases/tag/v0.1.0)
+最新版本: [A Skill: Github Project Release 0.1.0](https://github.com/huaaorain/a-skill-github-project-release/releases/tag/v0.1.0)
 
 | 版本 | 發佈時間 | 發佈說明 |
 | --- | --- | --- |
-| `v0.1.0` | 2026-10-27 | [開啟](https://github.com/huaaorain/github-project-release/releases/tag/v0.1.0) |
+| `v0.1.0` | 2026-10-27 | [開啟](https://github.com/huaaorain/a-skill-github-project-release/releases/tag/v0.1.0) |
 
 <details>
 <summary><strong>全部版本下載</strong></summary>
 
-### GitHub Project Release 0.1.0
+### A Skill: Github Project Release 0.1.0
 
-發佈說明: [開啟](https://github.com/huaaorain/github-project-release/releases/tag/v0.1.0)
+發佈說明: [開啟](https://github.com/huaaorain/a-skill-github-project-release/releases/tag/v0.1.0)
 
-- [FILE_MANIFEST.md](https://github.com/huaaorain/github-project-release/releases/download/v0.1.0/FILE_MANIFEST.md) — 485 B
-- [github-project-release.zip](https://github.com/huaaorain/github-project-release/releases/download/v0.1.0/github-project-release.zip) — 44.3 KB
-- [release-manifest.json](https://github.com/huaaorain/github-project-release/releases/download/v0.1.0/release-manifest.json) — 729 B
-- [SHA256SUMS.txt](https://github.com/huaaorain/github-project-release/releases/download/v0.1.0/SHA256SUMS.txt) — 93 B
-- [原始碼（zip）](https://github.com/huaaorain/github-project-release/archive/refs/tags/v0.1.0.zip)
-- [原始碼（tar.gz）](https://github.com/huaaorain/github-project-release/archive/refs/tags/v0.1.0.tar.gz)
+- [FILE_MANIFEST.md](https://github.com/huaaorain/a-skill-github-project-release/releases/download/v0.1.0/FILE_MANIFEST.md) — 485 B
+- [github-project-release.zip](https://github.com/huaaorain/a-skill-github-project-release/releases/download/v0.1.0/github-project-release.zip) — 44.3 KB
+- [release-manifest.json](https://github.com/huaaorain/a-skill-github-project-release/releases/download/v0.1.0/release-manifest.json) — 729 B
+- [SHA256SUMS.txt](https://github.com/huaaorain/a-skill-github-project-release/releases/download/v0.1.0/SHA256SUMS.txt) — 93 B
+- [原始碼（zip）](https://github.com/huaaorain/a-skill-github-project-release/archive/refs/tags/v0.1.0.zip)
+- [原始碼（tar.gz）](https://github.com/huaaorain/a-skill-github-project-release/archive/refs/tags/v0.1.0.tar.gz)
 
 </details>
 <!-- release-catalog:end -->

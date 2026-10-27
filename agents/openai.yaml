@@ -1,4 +1,4 @@
 interface:
-  display_name: "GitHub Project Release"
+  display_name: "A Skill: Github Project Release"
   short_description: "Publish a project to GitHub and maintain versioned releases"
-  default_prompt: "Use $github-project-release to publish this project to GitHub, build the README, and maintain its release catalog."
+  default_prompt: "Use $a-skill-github-project-release to publish this project to GitHub, build the README, and maintain its release catalog."
