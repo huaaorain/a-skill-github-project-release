@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
   "project": {
-    "name": "GitHub Project Release",
+    "name": "A Skill: Github Project Release",
     "description": "A Codex skill for publishing projects to GitHub and maintaining versioned releases, READMEs, screenshots, and download catalogs.",
-    "repository": "huaaorain/github-project-release",
+    "repository": "huaaorain/a-skill-github-project-release",
     "homepage": "",
     "topics": [
       "codex-skill",
@@ -79,16 +79,16 @@
   "screenshots": [
     {
       "path": "docs/assets/release-flow.svg",
-      "description": "GitHub Project Release 的构建、预检、Draft Release 与版本目录同步流程。"
+      "description": "A Skill: Github Project Release 的构建、预检、Draft Release 与版本目录同步流程。"
     }
   ],
   "artifacts": [
     {
-      "path": "release-build/github-project-release.zip",
+      "path": "release-build/a-skill-github-project-release.zip",
       "role": "skill",
       "description": "完整 skill 包，包括 SKILL.md、scripts、references、assets 与 README。",
       "required": true,
-      "download_name": "github-project-release.zip"
+      "download_name": "a-skill-github-project-release.zip"
     }
   ]
 }

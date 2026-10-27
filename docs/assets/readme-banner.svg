@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="360" viewBox="0 0 1200 360" role="img" aria-labelledby="title desc">
-  <title id="title">GitHub Project Release</title>
+  <title id="title">A Skill: Github Project Release</title>
   <desc id="desc">A controlled workflow from finished project to published GitHub release</desc>
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
@@ -20,8 +20,8 @@
   <circle cx="1070" cy="36" r="160" fill="#c5f36b" fill-opacity=".06"/>
   <g font-family="Segoe UI, Microsoft YaHei UI, Noto Sans CJK SC, sans-serif">
     <text x="64" y="70" fill="#c5f36b" font-size="16" font-weight="700" letter-spacing="4">SOURCE → VERIFY → DRAFT → RELEASE</text>
-    <text x="64" y="148" fill="#f6f2e8" font-size="58" font-weight="760" letter-spacing="-2">GITHUB PROJECT</text>
-    <text x="64" y="210" fill="#f6f2e8" font-size="58" font-weight="760" letter-spacing="-2">RELEASE</text>
+    <text x="64" y="148" fill="#f6f2e8" font-size="48" font-weight="760" letter-spacing="-2">A SKILL:</text>
+    <text x="64" y="204" fill="#f6f2e8" font-size="42" font-weight="760" letter-spacing="-2">GITHUB PROJECT RELEASE</text>
     <text x="66" y="262" fill="#aebbb5" font-size="20">从完成的项目到可追溯、可恢复的 GitHub 发布。</text>
     <path d="M64 305H520" fill="none" stroke="url(#line)" stroke-width="4" stroke-linecap="round"/>
   </g>

@@ -1,8 +1,8 @@
 <p align="center">
-  <img src="docs/assets/readme-banner.svg" alt="GitHub Project Release skill" width="100%">
+  <img src="docs/assets/readme-banner.svg" alt="A Skill: Github Project Release skill" width="100%">
 </p>
 
-<h1 align="center">GitHub Project Release</h1>
+<h1 align="center">A Skill: Github Project Release</h1>
 
 <p align="center">
   <strong>Turn a finished project into a publishable, traceable, and recoverable GitHub repository and release.</strong>
@@ -24,7 +24,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/huaaorain/github-project-release/releases/latest"><strong>Download latest</strong></a>
+  <a href="https://github.com/huaaorain/a-skill-github-project-release/releases/latest"><strong>Download latest</strong></a>
   ·
   <a href="#core-capabilities">Core capabilities</a>
   ·
@@ -34,7 +34,7 @@
   ·
   <a href="#all-releases">All releases</a>
   ·
-  <a href="https://github.com/huaaorain/github-project-release/issues">Report an issue</a>
+  <a href="https://github.com/huaaorain/a-skill-github-project-release/issues">Report an issue</a>
 </p>
 
 ---
@@ -50,7 +50,7 @@ Publishing a finished project spans Git commits, build outputs, Release assets, 
 - lose useful historical download links;
 - let localized READMEs drift after a release.
 
-**GitHub Project Release** organizes these steps into a controlled workflow. It defaults to putting source code in Git while keeping executables and distributables in GitHub Releases.
+**A Skill: Github Project Release** organizes these steps into a controlled workflow. It defaults to putting source code in Git while keeping executables and distributables in GitHub Releases.
 
 ## Core capabilities
 
@@ -91,7 +91,7 @@ Publishing a finished project spans Git commits, build outputs, Release assets, 
 
 ## Release workflow
 
-![GitHub Project Release workflow](docs/assets/release-flow.svg)
+![A Skill: Github Project Release workflow](docs/assets/release-flow.svg)
 
 _This diagram describes the actual release process. It is not an application screenshot._
 
@@ -102,37 +102,37 @@ Every release moves through build and test, documentation and media, asset manif
 Clone or extract this repository into:
 
 ```text
-${CODEX_HOME}/skills/github-project-release
+${CODEX_HOME}/skills/a-skill-github-project-release
 ```
 
 On Windows, the default location is usually:
 
 ```text
-C:\Users\<USER>\.codex\skills\github-project-release
+C:\Users\<USER>\.codex\skills\a-skill-github-project-release
 ```
 
 Reopen Codex, then invoke the skill explicitly:
 
 ```text
-$github-project-release
+$a-skill-github-project-release
 ```
 
-Alternatively, download `github-project-release.zip` from Releases and place the whole `github-project-release/` directory in the skills path. Do not copy only `SKILL.md`; scripts, templates, and references are part of the workflow.
+Alternatively, download `github-project-release.zip` from Releases and place the whole `a-skill-github-project-release/` directory in the skills path. Do not copy only `SKILL.md`; scripts, templates, and references are part of the workflow.
 
 ## Usage
 
 After the project has passed its own tests and build:
 
 ```text
-Use $github-project-release to publish this project to GitHub.
+Use $a-skill-github-project-release to publish this project to GitHub.
 ```
 
 Common scoped requests:
 
 ```text
-Use $github-project-release to create a Draft Release for v0.2.0.
-Use $github-project-release to refresh the README and localized release catalogs.
-Use $github-project-release to update an existing Release body without changing its assets.
+Use $a-skill-github-project-release to create a Draft Release for v0.2.0.
+Use $a-skill-github-project-release to refresh the README and localized release catalogs.
+Use $a-skill-github-project-release to update an existing Release body without changing its assets.
 ```
 
 ## Safety boundaries
@@ -169,7 +169,7 @@ python .\scripts\release_manager.py --help
 ## Project structure
 
 ```text
-github-project-release/
+a-skill-github-project-release/
 ├─ SKILL.md
 ├─ agents/
 ├─ assets/
@@ -196,25 +196,25 @@ github-project-release/
 ## All releases
 
 <!-- release-catalog:start -->
-Latest: [GitHub Project Release 0.1.0](https://github.com/huaaorain/github-project-release/releases/tag/v0.1.0)
+Latest: [A Skill: Github Project Release 0.1.0](https://github.com/huaaorain/a-skill-github-project-release/releases/tag/v0.1.0)
 
 | Version | Published | Release notes |
 | --- | --- | --- |
-| `v0.1.0` | 2026-10-27 | [Open](https://github.com/huaaorain/github-project-release/releases/tag/v0.1.0) |
+| `v0.1.0` | 2026-10-27 | [Open](https://github.com/huaaorain/a-skill-github-project-release/releases/tag/v0.1.0) |
 
 <details>
 <summary><strong>All version downloads</strong></summary>
 
-### GitHub Project Release 0.1.0
+### A Skill: Github Project Release 0.1.0
 
-Release notes: [Open](https://github.com/huaaorain/github-project-release/releases/tag/v0.1.0)
+Release notes: [Open](https://github.com/huaaorain/a-skill-github-project-release/releases/tag/v0.1.0)
 
-- [FILE_MANIFEST.md](https://github.com/huaaorain/github-project-release/releases/download/v0.1.0/FILE_MANIFEST.md) — 485 B
-- [github-project-release.zip](https://github.com/huaaorain/github-project-release/releases/download/v0.1.0/github-project-release.zip) — 44.3 KB
-- [release-manifest.json](https://github.com/huaaorain/github-project-release/releases/download/v0.1.0/release-manifest.json) — 729 B
-- [SHA256SUMS.txt](https://github.com/huaaorain/github-project-release/releases/download/v0.1.0/SHA256SUMS.txt) — 93 B
-- [Source code (zip)](https://github.com/huaaorain/github-project-release/archive/refs/tags/v0.1.0.zip)
-- [Source code (tar.gz)](https://github.com/huaaorain/github-project-release/archive/refs/tags/v0.1.0.tar.gz)
+- [FILE_MANIFEST.md](https://github.com/huaaorain/a-skill-github-project-release/releases/download/v0.1.0/FILE_MANIFEST.md) — 485 B
+- [github-project-release.zip](https://github.com/huaaorain/a-skill-github-project-release/releases/download/v0.1.0/github-project-release.zip) — 44.3 KB
+- [release-manifest.json](https://github.com/huaaorain/a-skill-github-project-release/releases/download/v0.1.0/release-manifest.json) — 729 B
+- [SHA256SUMS.txt](https://github.com/huaaorain/a-skill-github-project-release/releases/download/v0.1.0/SHA256SUMS.txt) — 93 B
+- [Source code (zip)](https://github.com/huaaorain/a-skill-github-project-release/archive/refs/tags/v0.1.0.zip)
+- [Source code (tar.gz)](https://github.com/huaaorain/a-skill-github-project-release/archive/refs/tags/v0.1.0.tar.gz)
 
 </details>
 <!-- release-catalog:end -->

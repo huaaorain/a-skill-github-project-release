@@ -4,7 +4,7 @@
 
 ### Added
 
-- First public release of the GitHub Project Release skill.
+- First public release of the A Skill: Github Project Release skill.
 - First-publish workflow with a default initial version of `0.1.0`.
 - Release-only artifact policy.
 - Version manifests with file descriptions and SHA-256 checksums.
