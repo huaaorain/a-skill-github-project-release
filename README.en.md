@@ -196,7 +196,27 @@ github-project-release/
 ## All releases
 
 <!-- release-catalog:start -->
-The release catalog is generated after the first published release.
+Latest: [GitHub Project Release 0.1.0](https://github.com/huaaorain/github-project-release/releases/tag/v0.1.0)
+
+| Version | Published | Release notes |
+| --- | --- | --- |
+| `v0.1.0` | 2026-10-27 | [Open](https://github.com/huaaorain/github-project-release/releases/tag/v0.1.0) |
+
+<details>
+<summary><strong>All version downloads</strong></summary>
+
+### GitHub Project Release 0.1.0
+
+Release notes: [Open](https://github.com/huaaorain/github-project-release/releases/tag/v0.1.0)
+
+- [FILE_MANIFEST.md](https://github.com/huaaorain/github-project-release/releases/download/v0.1.0/FILE_MANIFEST.md) — 485 B
+- [github-project-release.zip](https://github.com/huaaorain/github-project-release/releases/download/v0.1.0/github-project-release.zip) — 44.3 KB
+- [release-manifest.json](https://github.com/huaaorain/github-project-release/releases/download/v0.1.0/release-manifest.json) — 729 B
+- [SHA256SUMS.txt](https://github.com/huaaorain/github-project-release/releases/download/v0.1.0/SHA256SUMS.txt) — 93 B
+- [Source code (zip)](https://github.com/huaaorain/github-project-release/archive/refs/tags/v0.1.0.zip)
+- [Source code (tar.gz)](https://github.com/huaaorain/github-project-release/archive/refs/tags/v0.1.0.tar.gz)
+
+</details>
 <!-- release-catalog:end -->
 
 ## Acknowledgements
