@@ -13,9 +13,12 @@ import sys
 import unittest
 import uuid
 from pathlib import Path
+from unittest import mock
 
 
 SCRIPT = Path(__file__).with_name("release_manager.py")
+sys.path.insert(0, str(SCRIPT.parent))
+import release_manager  # noqa: E402
 
 
 class ReleaseManagerSmokeTests(unittest.TestCase):
@@ -279,6 +282,15 @@ class ReleaseManagerSmokeTests(unittest.TestCase):
         )
         self.assertNotEqual(result.returncode, 0)
         self.assertIn("--confirm", result.stderr)
+
+    def test_find_release_includes_drafts(self) -> None:
+        with mock.patch.object(
+            release_manager,
+            "list_releases",
+            return_value=[{"tag_name": "v1.0.0", "draft": True, "id": 42}],
+        ):
+            release = release_manager.find_release("example/demo", "v1.0.0")
+        self.assertEqual(release["id"], 42)
 
 
 if __name__ == "__main__":

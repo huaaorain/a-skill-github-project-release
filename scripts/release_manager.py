@@ -310,16 +310,12 @@ def list_releases(repo: str, include_drafts: bool = True) -> list[dict]:
 
 
 def find_release(repo: str, tag: str) -> dict | None:
-    try:
-        result = api_request(
-            "GET",
-            f"/repos/{repo}/releases/tags/{urllib.parse.quote(tag, safe='')}",
-        )
-        return result if isinstance(result, dict) else None
-    except ReleaseError as exc:
-        if "HTTP 404" in str(exc):
-            return None
-        raise
+    # The by-tag endpoint omits draft releases, so search the authenticated
+    # release list as well. This keeps draft creation and publishing resumable.
+    for release in list_releases(repo, include_drafts=True):
+        if release.get("tag_name") == tag:
+            return release
+    return None
 
 
 def remote_tag_commit(repo: str, tag: str) -> str | None:
