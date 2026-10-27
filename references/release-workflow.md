@@ -4,7 +4,7 @@
 
 Use this order so the tag, source commit, built artifacts, README, and release body describe the same version.
 
-1. Determine the next version and verify that its tag and Release do not already exist.
+1. Determine the next version and verify that its tag and Release do not already exist. For a project with no published release, use `0.1.0` unless the user explicitly chooses another initial version.
 2. Build and test from the intended source commit.
 3. Capture or select real feature images and place them under `docs/assets/`.
 4. Update README, installation instructions, compatibility notes, and the surface-level download information.

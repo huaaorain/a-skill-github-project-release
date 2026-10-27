@@ -376,6 +376,7 @@ def init_spec(args: argparse.Namespace) -> None:
         },
         "release": {
             "tag_prefix": args.tag_prefix,
+            "initial_version": "0.1.0",
             "draft": True,
             "prerelease": False,
         },
@@ -706,6 +707,13 @@ def preflight(args: argparse.Namespace) -> None:
     tag_prefix = str(spec.get("release", {}).get("tag_prefix", ""))
     if tag_prefix and not tag.startswith(tag_prefix):
         fail(f"Tag {tag} does not use configured prefix {tag_prefix}")
+    release_tags = git_value(root, "tag", "--list", f"{tag_prefix}*").splitlines()
+    initial_version = str(spec.get("release", {}).get("initial_version", "")).strip()
+    if not release_tags and initial_version and tag != f"{tag_prefix}{initial_version}":
+        fail(
+            f"The first release must use {tag_prefix}{initial_version}; got {tag}. "
+            "Set release.initial_version explicitly only when the project requires another starting version."
+        )
     if git_value(root, "rev-parse", "-q", "--verify", f"refs/tags/{tag}"):
         fail(f"Tag already exists: {tag}")
     locales = readme_locales(spec)

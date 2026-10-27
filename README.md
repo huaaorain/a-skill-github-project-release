@@ -9,10 +9,18 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-1.0.2-ff7a45?style=flat-square" alt="Version 1.0.2">
+  <img src="https://img.shields.io/badge/version-0.1.0-ff7a45?style=flat-square" alt="Version 0.1.0">
   <img src="https://img.shields.io/badge/python-3.10%2B-3776ab?style=flat-square&logo=python&logoColor=white" alt="Python 3.10+">
   <img src="https://img.shields.io/badge/platform-GitHub-111816?style=flat-square&logo=github&logoColor=white" alt="GitHub">
   <img src="https://img.shields.io/badge/policy-release--only-c5f36b?style=flat-square" alt="Release-only">
+</p>
+
+<p align="center">
+  <a href="README.en.md">English</a>
+  ·
+  <strong>简体中文</strong>
+  ·
+  <a href="README.zh-TW.md">繁體中文</a>
 </p>
 
 <p align="center">
@@ -186,32 +194,12 @@ github-project-release/
 
 ## 更新记录
 
-- [1.0.2：首个公开版本](docs/releases/v1.0.2.md)
+- [0.1.0：首个公开版本](docs/releases/v0.1.0.md)
 
 ## 所有版本
 
 <!-- release-catalog:start -->
-最新版本: [GitHub Project Release 1.0.2](https://github.com/huaaorain/github-project-release/releases/tag/v1.0.2)
-
-| 版本 | 发布时间 | 发布说明 |
-| --- | --- | --- |
-| `v1.0.2` | 2026-10-27 | [打开](https://github.com/huaaorain/github-project-release/releases/tag/v1.0.2) |
-
-<details>
-<summary><strong>全部版本下载</strong></summary>
-
-### GitHub Project Release 1.0.2
-
-发布说明: [打开](https://github.com/huaaorain/github-project-release/releases/tag/v1.0.2)
-
-- [FILE_MANIFEST.md](https://github.com/huaaorain/github-project-release/releases/download/v1.0.2/FILE_MANIFEST.md) — 485 B
-- [github-project-release.zip](https://github.com/huaaorain/github-project-release/releases/download/v1.0.2/github-project-release.zip) — 39.7 KB
-- [release-manifest.json](https://github.com/huaaorain/github-project-release/releases/download/v1.0.2/release-manifest.json) — 729 B
-- [SHA256SUMS.txt](https://github.com/huaaorain/github-project-release/releases/download/v1.0.2/SHA256SUMS.txt) — 93 B
-- [源代码（zip）](https://github.com/huaaorain/github-project-release/archive/refs/tags/v1.0.2.zip)
-- [源代码（tar.gz）](https://github.com/huaaorain/github-project-release/archive/refs/tags/v1.0.2.tar.gz)
-
-</details>
+版本目录将在首次 Release 发布后生成。
 <!-- release-catalog:end -->
 
 ## 致谢

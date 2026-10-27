@@ -16,6 +16,7 @@
   },
   "release": {
     "tag_prefix": "v",
+    "initial_version": "0.1.0",
     "draft": true,
     "prerelease": false
   },
@@ -37,6 +38,38 @@
           "source_tar": "源代码（tar.gz）",
           "no_assets": "没有已上传的附件。",
           "no_releases": "暂无已发布版本。"
+        }
+      },
+      {
+        "path": "README.zh-TW.md",
+        "label": "繁體中文",
+        "catalog_labels": {
+          "latest": "最新版本",
+          "version": "版本",
+          "published": "發佈時間",
+          "release_notes": "發佈說明",
+          "downloads": "全部版本下載",
+          "open": "開啟",
+          "source_zip": "原始碼（zip）",
+          "source_tar": "原始碼（tar.gz）",
+          "no_assets": "尚未上傳附件。",
+          "no_releases": "尚無已發佈版本。"
+        }
+      },
+      {
+        "path": "README.en.md",
+        "label": "English",
+        "catalog_labels": {
+          "latest": "Latest",
+          "version": "Version",
+          "published": "Published",
+          "release_notes": "Release notes",
+          "downloads": "All version downloads",
+          "open": "Open",
+          "source_zip": "Source code (zip)",
+          "source_tar": "Source code (tar.gz)",
+          "no_assets": "No uploaded assets.",
+          "no_releases": "No published releases yet."
         }
       }
     ],

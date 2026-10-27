@@ -126,7 +126,7 @@ class ReleaseManagerSmokeTests(unittest.TestCase):
             "--spec",
             str(self.spec_path),
             "--tag",
-            "v1.0.0",
+            "v0.1.0",
             "--output",
             str(self.root / "release-build"),
         )
@@ -146,7 +146,7 @@ class ReleaseManagerSmokeTests(unittest.TestCase):
             "--spec",
             str(self.spec_path),
             "--tag",
-            "v1.0.0",
+            "v0.1.0",
             "--summary",
             str(summary),
             "--manifest",
@@ -164,7 +164,7 @@ class ReleaseManagerSmokeTests(unittest.TestCase):
             "--spec",
             str(self.spec_path),
             "--tag",
-            "v1.0.0",
+            "v0.1.0",
             "--notes",
             str(notes),
         )
@@ -173,7 +173,7 @@ class ReleaseManagerSmokeTests(unittest.TestCase):
             "--spec",
             str(self.spec_path),
             "--tag",
-            "v1.0.0",
+            "v0.1.0",
             "--target",
             "HEAD",
             "--notes",
@@ -186,6 +186,28 @@ class ReleaseManagerSmokeTests(unittest.TestCase):
             "--dry-run",
         )
         self.assertIn('"draft": true', result.stdout)
+
+    def test_first_release_defaults_to_0_1_0(self) -> None:
+        notes = self.root / "release-build" / "notes.md"
+        notes.write_text(
+            "## Summary\n\nInitial release.\n\n"
+            "## Highlights\n\n- Works.\n\n"
+            "## Compatibility and upgrade notes\n\nNone.\n\n"
+            "## Release files\n\nPending.\n",
+            encoding="utf-8",
+        )
+        result = self.cli(
+            "preflight",
+            "--spec",
+            str(self.spec_path),
+            "--tag",
+            "v1.0.0",
+            "--notes",
+            str(notes),
+            check=False,
+        )
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("first release must use v0.1.0", result.stderr)
 
     def test_catalog_updates_only_marker_block(self) -> None:
         releases = [
