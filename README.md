@@ -191,7 +191,27 @@ github-project-release/
 ## 所有版本
 
 <!-- release-catalog:start -->
-版本目录将在首次 Release 发布后生成。
+最新版本: [GitHub Project Release 1.0.2](https://github.com/huaaorain/github-project-release/releases/tag/v1.0.2)
+
+| 版本 | 发布时间 | 发布说明 |
+| --- | --- | --- |
+| `v1.0.2` | 2026-10-27 | [打开](https://github.com/huaaorain/github-project-release/releases/tag/v1.0.2) |
+
+<details>
+<summary><strong>全部版本下载</strong></summary>
+
+### GitHub Project Release 1.0.2
+
+发布说明: [打开](https://github.com/huaaorain/github-project-release/releases/tag/v1.0.2)
+
+- [FILE_MANIFEST.md](https://github.com/huaaorain/github-project-release/releases/download/v1.0.2/FILE_MANIFEST.md) — 485 B
+- [github-project-release.zip](https://github.com/huaaorain/github-project-release/releases/download/v1.0.2/github-project-release.zip) — 39.7 KB
+- [release-manifest.json](https://github.com/huaaorain/github-project-release/releases/download/v1.0.2/release-manifest.json) — 729 B
+- [SHA256SUMS.txt](https://github.com/huaaorain/github-project-release/releases/download/v1.0.2/SHA256SUMS.txt) — 93 B
+- [源代码（zip）](https://github.com/huaaorain/github-project-release/archive/refs/tags/v1.0.2.zip)
+- [源代码（tar.gz）](https://github.com/huaaorain/github-project-release/archive/refs/tags/v1.0.2.tar.gz)
+
+</details>
 <!-- release-catalog:end -->
 
 ## 致谢
