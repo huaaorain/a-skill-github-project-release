@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "project": {
+    "name": "GitHub Project Release",
+    "description": "A Codex skill for publishing projects to GitHub and maintaining versioned releases, READMEs, screenshots, and download catalogs.",
+    "repository": "huaaorain/github-project-release",
+    "homepage": "",
+    "topics": [
+      "codex-skill",
+      "github",
+      "release-automation",
+      "github-releases",
+      "readme",
+      "project-publishing"
+    ]
+  },
+  "release": {
+    "tag_prefix": "v",
+    "draft": true,
+    "prerelease": false
+  },
+  "artifact_policy": "release-only",
+  "readme": {
+    "path": "README.md",
+    "locales": [
+      {
+        "path": "README.md",
+        "label": "简体中文",
+        "catalog_labels": {
+          "latest": "最新版本",
+          "version": "版本",
+          "published": "发布时间",
+          "release_notes": "发布说明",
+          "downloads": "全部版本下载",
+          "open": "打开",
+          "source_zip": "源代码（zip）",
+          "source_tar": "源代码（tar.gz）",
+          "no_assets": "没有已上传的附件。",
+          "no_releases": "暂无已发布版本。"
+        }
+      }
+    ],
+    "catalog_start": "<!-- release-catalog:start -->",
+    "catalog_end": "<!-- release-catalog:end -->"
+  },
+  "screenshots": [
+    {
+      "path": "docs/assets/release-flow.svg",
+      "description": "GitHub Project Release 的构建、预检、Draft Release 与版本目录同步流程。"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "release-build/github-project-release.zip",
+      "role": "skill",
+      "description": "完整 skill 包，包括 SKILL.md、scripts、references、assets 与 README。",
+      "required": true,
+      "download_name": "github-project-release.zip"
+    }
+  ]
+}
