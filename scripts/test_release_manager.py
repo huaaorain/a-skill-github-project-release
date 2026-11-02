@@ -82,6 +82,10 @@ class ReleaseManagerSmokeTests(unittest.TestCase):
                 "path": "release-build/demo.zip",
                 "role": "standard",
                 "description": "Demo application archive.",
+                "localized_descriptions": {
+                    "zh-CN": "演示应用压缩包。",
+                    "en": "Demo application archive.",
+                },
                 "required": True,
                 "download_name": "demo.zip",
             }
@@ -130,7 +134,9 @@ class ReleaseManagerSmokeTests(unittest.TestCase):
             "--output",
             str(self.root / "release-build"),
         )
-        manifest = json.loads((self.root / "release-build" / "release-manifest.json").read_text())
+        manifest = json.loads(
+            (self.root / "release-build" / "release-manifest.json").read_text(encoding="utf-8")
+        )
         self.assertEqual(manifest["artifacts"][0]["name"], "demo.zip")
         self.assertEqual(len(manifest["artifacts"][0]["sha256"]), 64)
         summary = self.root / "release-build" / "summary.md"
@@ -313,6 +319,74 @@ class ReleaseManagerSmokeTests(unittest.TestCase):
         ):
             release = release_manager.find_release("example/demo", "v1.0.0")
         self.assertEqual(release["id"], 42)
+
+    def test_localized_accordion_release_notes(self) -> None:
+        release_dir = self.root / "docs" / "releases"
+        release_dir.mkdir()
+        release_dir.joinpath("v0.1.0.zh-CN.md").write_text(
+            "## 版本摘要\n\n首个版本。\n\n## 主要更新\n\n- 可用。\n",
+            encoding="utf-8",
+        )
+        release_dir.joinpath("v0.1.0.zh-TW.md").write_text(
+            "## 版本摘要\n\n首個版本。\n\n## 主要更新\n\n- 可用。\n",
+            encoding="utf-8",
+        )
+        release_dir.joinpath("v0.1.0.en.md").write_text(
+            "## Summary\n\nFirst release.\n\n## Highlights\n\n- Works.\n",
+            encoding="utf-8",
+        )
+        spec = json.loads(self.spec_path.read_text(encoding="utf-8"))
+        spec["release_notes"] = {
+            "layout": "accordion",
+            "open_locale": "zh-CN",
+            "locales": [
+                {"id": "zh-CN", "label": "简体中文", "path_template": "docs/releases/{tag}.zh-CN.md"},
+                {"id": "zh-TW", "label": "繁體中文", "path_template": "docs/releases/{tag}.zh-TW.md"},
+                {"id": "en", "label": "English", "path_template": "docs/releases/{tag}.en.md"},
+            ],
+            "file_table": {
+                "title": "发布文件 / Release files",
+                "description_locales": ["zh-CN", "en"],
+            },
+        }
+        self.spec_path.write_text(json.dumps(spec, indent=2), encoding="utf-8")
+        self.run_cmd(["git", "add", "."])
+        self.run_cmd(["git", "commit", "-m", "Add localized release notes"])
+        self.cli(
+            "manifest",
+            "--spec",
+            str(self.spec_path),
+            "--tag",
+            "v0.1.0",
+            "--output",
+            str(self.root / "release-build"),
+        )
+        output = self.root / "release-build" / "localized-notes.md"
+        self.cli(
+            "render-localized-notes",
+            "--spec",
+            str(self.spec_path),
+            "--tag",
+            "v0.1.0",
+            "--manifest",
+            str(self.root / "release-build" / "release-manifest.json"),
+            "--output",
+            str(output),
+        )
+        rendered = output.read_text(encoding="utf-8")
+        self.assertEqual(rendered.count("<details"), 3)
+        self.assertEqual(rendered.count("<details open>"), 1)
+        self.assertIn("<summary><strong>English</strong></summary>", rendered)
+        self.assertIn("演示应用压缩包。 / Demo application archive.", rendered)
+        self.cli(
+            "preflight",
+            "--spec",
+            str(self.spec_path),
+            "--tag",
+            "v0.1.0",
+            "--notes",
+            str(output),
+        )
 
     def test_asset_download_requests_binary_media_type(self) -> None:
         response = mock.MagicMock()

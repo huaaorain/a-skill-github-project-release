@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.1.1] - 2026-11-02
+
+### Added
+
+- Localized Release notes with configurable `accordion` and `anchors` layouts.
+- Per-language release-note source files under `docs/releases/`.
+- A shared bilingual file table generated once from the release manifest.
+- Localized asset descriptions and preflight checks for language selectors,
+  default-open content, filenames, and source metadata.
+
 ## [0.1.0] - 2026-10-27
 
 ### Added

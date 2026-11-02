@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-0.1.0-ff7a45?style=flat-square" alt="Version 0.1.0">
+  <img src="https://img.shields.io/badge/version-0.1.1-ff7a45?style=flat-square" alt="Version 0.1.1">
   <img src="https://img.shields.io/badge/python-3.10%2B-3776ab?style=flat-square&logo=python&logoColor=white" alt="Python 3.10+">
   <img src="https://img.shields.io/badge/platform-GitHub-111816?style=flat-square&logo=github&logoColor=white" alt="GitHub">
   <img src="https://img.shields.io/badge/policy-release--only-c5f36b?style=flat-square" alt="Release-only">
@@ -80,7 +80,7 @@
     </tr>
     <tr>
       <td><strong>多&#8239;语&#8239;言</strong></td>
-      <td>同步维护多个完整 README、语言切换入口和各自的本地化发布目录。</td>
+      <td>同步维护多语言 README，并为 Release 正文提供默认只展开一种语言的折叠式翻译。</td>
     </tr>
     <tr>
       <td><strong>失&#8239;败&#8239;恢&#8239;复</strong></td>
@@ -136,6 +136,7 @@ $a-skill-github-project-release
 ```text
 使用 $a-skill-github-project-release 为 v1.2.0 生成 Draft Release。
 使用 $a-skill-github-project-release 更新 README 和三语版本目录。
+使用 $a-skill-github-project-release 为 Release 生成三语折叠说明。
 使用 $a-skill-github-project-release 只优化已有 Release 的说明，不修改附件。
 ```
 
@@ -194,7 +195,8 @@ a-skill-github-project-release/
 
 ## 更新记录
 
-- [0.1.0：首个公开版本](docs/releases/v0.1.0.md)
+- [0.1.1：三语折叠 Release 说明与统一文件表](docs/releases/v0.1.1.zh-CN.md)
+- [0.1.0：首个公开版本](docs/releases/v0.1.0.zh-CN.md)
 
 ## 所有版本
 
