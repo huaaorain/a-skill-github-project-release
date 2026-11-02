@@ -187,7 +187,7 @@ a-skill-github-project-release/
 
 ## 已知限制
 
-- GitHub README 不支持 JavaScript，语言切换会打开对应语言文件。
+- GitHub Markdown 不支持 JavaScript：README 语言切换会打开对应文件，Release 语言使用折叠面板而不是真正标签页。
 - 自动截图取决于项目是否提供可安全运行的演示模式。
 - 无法根据代码 diff 完全推断产品影响，发布说明仍需一次人工审核。
 - GitHub 单个 Release 附件通常不能超过 2 GiB。
