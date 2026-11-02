@@ -198,7 +198,7 @@ a-skill-github-project-release/
 ## All releases
 
 <!-- release-catalog:start -->
-Latest: [GitHub Project Release 0.1.1](https://github.com/huaaorain/a-skill-github-project-release/releases/tag/v0.1.1)
+Latest: [A Skill: Github Project Release 0.1.1](https://github.com/huaaorain/a-skill-github-project-release/releases/tag/v0.1.1)
 
 | Version | Published | Release notes |
 | --- | --- | --- |
@@ -208,7 +208,7 @@ Latest: [GitHub Project Release 0.1.1](https://github.com/huaaorain/a-skill-gith
 <details>
 <summary><strong>All version downloads</strong></summary>
 
-### GitHub Project Release 0.1.1
+### A Skill: Github Project Release 0.1.1
 
 Release notes: [Open](https://github.com/huaaorain/a-skill-github-project-release/releases/tag/v0.1.1)
 

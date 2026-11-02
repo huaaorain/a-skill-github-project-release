@@ -201,7 +201,7 @@ a-skill-github-project-release/
 ## 所有版本
 
 <!-- release-catalog:start -->
-最新版本: [GitHub Project Release 0.1.1](https://github.com/huaaorain/a-skill-github-project-release/releases/tag/v0.1.1)
+最新版本: [A Skill: Github Project Release 0.1.1](https://github.com/huaaorain/a-skill-github-project-release/releases/tag/v0.1.1)
 
 | 版本 | 发布时间 | 发布说明 |
 | --- | --- | --- |
@@ -211,7 +211,7 @@ a-skill-github-project-release/
 <details>
 <summary><strong>全部版本下载</strong></summary>
 
-### GitHub Project Release 0.1.1
+### A Skill: Github Project Release 0.1.1
 
 发布说明: [打开](https://github.com/huaaorain/a-skill-github-project-release/releases/tag/v0.1.1)
 
