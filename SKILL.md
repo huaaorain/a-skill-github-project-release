@@ -70,6 +70,8 @@ Update the README with real installation steps, the latest downloads, a screensh
 
 When multiple languages are requested, create a complete README for each language, add a compact switcher below the badges, and declare every file under `readme.locales`. Keep the same screenshots, download URLs, section order, and catalog markers across translations.
 
+For localized Release notes, declare `release_notes.locales` and keep one source file per language. Use `accordion` layout when the user wants only one language visible at a time; GitHub's native Markdown cannot implement true JavaScript tabs. Use `anchors` only when every language should remain expanded on one page.
+
 Write the human summary later from `release-context.json`, project documentation, tests, and diffs. Do not commit generated `release-build/` files.
 
 ### 5. Commit before measuring the release
@@ -92,6 +94,12 @@ Then render the release body:
 
 ```powershell
 python "$SkillDir/scripts/release_manager.py" render-notes --spec .github/release-spec.json --tag v1.2.0 --summary release-build/summary.md --manifest release-build/release-manifest.json --output release-build/release-notes.md
+```
+
+If `release_notes.locales` is configured, use the localized renderer instead:
+
+```powershell
+python "$SkillDir/scripts/release_manager.py" render-localized-notes --spec .github/release-spec.json --tag v1.2.0 --manifest release-build/release-manifest.json --output release-build/release-notes.md
 ```
 
 Run preflight after committing:

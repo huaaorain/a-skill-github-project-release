@@ -26,6 +26,20 @@ Every release body must contain:
 
 For the first public release, replace the comparison with an initial-release overview and explain the product's purpose, capabilities, supported platforms, and limitations.
 
+## Localized release notes
+
+When the user requests multiple languages in a Release body:
+
+- Keep one complete source file per language under `docs/releases/`.
+- Declare each file and anchor identifier under `release_notes.locales`.
+- Use `layout: "accordion"` when only one language should be visible at a time. Each language becomes a `<details>` block, with exactly one block open by default.
+- Use `layout: "anchors"` only when all languages should remain expanded and a top link menu jumps between sections.
+- Keep the download/file table outside the language blocks and display it only once.
+- Combine only useful description languages in the shared file table; do not repeat the entire table for every translation.
+- Validate that every language contains the same version, compatibility facts, asset names, and source commit.
+
+GitHub strips JavaScript and interactive CSS from README and Release Markdown. Collapsed `<details>` is the closest native alternative to tabs; true in-place tab switching requires a separate GitHub Pages site.
+
 ## File table
 
 Use one row per distributed file:

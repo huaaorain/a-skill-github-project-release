@@ -162,6 +162,36 @@ def readme_locales(spec: dict) -> list[dict]:
     return result
 
 
+def release_note_locales(spec: dict) -> list[dict]:
+    config = spec.get("release_notes", {})
+    if not isinstance(config, dict):
+        fail("release_notes must be an object")
+    locales = config.get("locales")
+    if not isinstance(locales, list) or not locales:
+        return []
+    result: list[dict] = []
+    seen: set[str] = set()
+    for locale in locales:
+        if not isinstance(locale, dict):
+            fail("each release_notes locale must be an object")
+        locale_id = str(locale.get("id", "")).strip()
+        label = str(locale.get("label", "")).strip()
+        path_template = str(locale.get("path_template", "")).strip()
+        if not locale_id or not label or not path_template:
+            fail("each release_notes locale needs id, label, and path_template")
+        if locale_id in seen:
+            fail(f"duplicate release_notes locale id: {locale_id}")
+        seen.add(locale_id)
+        result.append(
+            {
+                "id": locale_id,
+                "label": label,
+                "path_template": path_template,
+            }
+        )
+    return result
+
+
 def repo_name(spec: dict) -> str:
     value = str(spec.get("project", {}).get("repository", "")).strip()
     if not re.fullmatch(r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", value):
@@ -486,6 +516,7 @@ def build_manifest(args: argparse.Namespace) -> None:
             "path": path.relative_to(root).as_posix(),
             "role": entry["role"],
             "description": entry["description"],
+            "localized_descriptions": entry.get("localized_descriptions", {}),
             "required": bool(entry.get("required", True)),
             "size": size,
             "sha256": digest,
@@ -534,6 +565,155 @@ def build_manifest(args: argparse.Namespace) -> None:
     print(manifest_path)
     print(output_dir / "FILE_MANIFEST.md")
     print(output_dir / "SHA256SUMS.txt")
+
+
+def localized_description(item: dict, locale_ids: list[str]) -> str:
+    descriptions = item.get("localized_descriptions", {})
+    if not isinstance(descriptions, dict):
+        descriptions = {}
+    values: list[str] = []
+    for locale_id in locale_ids:
+        value = str(descriptions.get(locale_id) or item.get("description", "")).strip()
+        if value and value not in values:
+            values.append(value)
+    if not values:
+        values.append(str(item.get("description", "")).strip())
+    return " / ".join(values)
+
+
+def shared_release_manifest_markdown(
+    manifest: dict,
+    repo: str,
+    tag: str,
+    config: dict,
+) -> list[str]:
+    file_config = config.get("file_table", {})
+    metadata_config = config.get("metadata", {})
+    source_config = config.get("source", {})
+    description_locales = file_config.get("description_locales", [])
+    if not isinstance(description_locales, list):
+        description_locales = []
+    title = str(file_config.get("title", "发布文件 / Release files"))
+    columns = file_config.get("columns", {})
+    if not isinstance(columns, dict):
+        columns = {}
+    lines = [
+        f"## {title}",
+        "",
+        "| "
+        + " | ".join(
+            (
+                str(columns.get("file", "文件 / File")),
+                str(columns.get("role", "类型 / Role")),
+                str(columns.get("purpose", "用途 / Purpose")),
+                str(columns.get("size", "大小 / Size")),
+                str(columns.get("download", "下载 / Download")),
+                "SHA-256",
+            )
+        )
+        + " |",
+        "| --- | --- | --- | ---: | --- | --- |",
+    ]
+    download_base = f"https://github.com/{repo}/releases/download/{urllib.parse.quote(tag, safe='')}"
+    for item in manifest.get("artifacts", []):
+        name = item["name"]
+        lines.append(
+            "| "
+            + " | ".join(
+                (
+                    md_cell(f"`{name}`"),
+                    md_cell(item.get("role", "")),
+                    md_cell(localized_description(item, description_locales)),
+                    human_size(int(item.get("size", 0))),
+                    f"[{columns.get('download_link', 'Download')}]({download_base}/{urllib.parse.quote(name, safe='')})",
+                    f"`{item.get('sha256', '')}`",
+                )
+            )
+            + " |"
+        )
+    lines.extend(("", f"## {metadata_config.get('title', '校验与元数据 / Checksums and metadata')}", ""))
+    lines.extend(
+        (
+            "| 文件 / File | 用途 / Purpose |",
+            "| --- | --- |",
+            "| `release-manifest.json` | 机器可读的版本与资产清单。 / Machine-readable release and asset inventory. |",
+            "| `FILE_MANIFEST.md` | 人类可读的文件清单。 / Human-readable file inventory. |",
+            "| `SHA256SUMS.txt` | 可下载资产的 SHA-256 校验值。 / SHA-256 checksums for downloadable assets. |",
+            "",
+            f"## {source_config.get('title', '源代码 / Source')}",
+            "",
+            f"- {source_config.get('commit_label', '提交 / Commit')}：`{manifest.get('commit', '')}`",
+            f"- [{source_config.get('source_zip_label', '源代码 ZIP / Source ZIP')}](https://github.com/{repo}/archive/refs/tags/{urllib.parse.quote(tag, safe='')}.zip)",
+            f"- [{source_config.get('source_tar_label', '源代码 TAR.GZ / Source TAR.GZ')}](https://github.com/{repo}/archive/refs/tags/{urllib.parse.quote(tag, safe='')}.tar.gz)",
+            "",
+            str(
+                source_config.get(
+                    "verify",
+                    "下载后请使用 `SHA256SUMS.txt` 校验文件完整性。  \nVerify downloaded files against `SHA256SUMS.txt`.",
+                )
+            ),
+            "",
+        )
+    )
+    return lines
+
+
+def render_localized_notes(args: argparse.Namespace) -> None:
+    root, _, spec = load_spec(args.spec)
+    manifest = load_json(Path(args.manifest).expanduser().resolve())
+    config = spec.get("release_notes", {})
+    locales = release_note_locales(spec)
+    if not locales:
+        fail("release_notes.locales is required for localized release notes")
+    layout = str(config.get("layout", "accordion")).strip().lower()
+    if layout not in {"accordion", "anchors"}:
+        fail("release_notes.layout must be accordion or anchors")
+    open_locale = str(config.get("open_locale", locales[0]["id"]))
+    if open_locale not in {locale["id"] for locale in locales}:
+        fail(f"release_notes.open_locale is not declared: {open_locale}")
+    sections: list[tuple[dict, str]] = []
+    for locale in locales:
+        relative = locale["path_template"].replace("{tag}", args.tag)
+        source = safe_project_path(root, relative, "release notes")
+        if not source.is_file():
+            fail(f"Localized release notes are missing: {relative}")
+        content = source.read_text(encoding="utf-8").strip()
+        if not content or "{{" in content:
+            fail(f"Localized release notes are empty or contain placeholders: {relative}")
+        sections.append((locale, content))
+    lines: list[str] = []
+    if layout == "anchors":
+        links = []
+        for locale in locales:
+            label = locale["label"]
+            if locale["id"] == open_locale:
+                links.append(f"<strong>{label}</strong>")
+            else:
+                links.append(f'<a href="#{locale["id"]}">{label}</a>')
+        lines.extend(("<p align=\"center\">", " · ".join(links), "</p>", ""))
+        for locale, content in sections:
+            lines.extend((f'<a id="{locale["id"]}"></a>', "", f"## {locale['label']}", "", content, "", "---", ""))
+    else:
+        intro = str(config.get("prompt", "点击语言名称展开对应版本说明。 / Select a language to expand its release notes."))
+        lines.extend((f"<p align=\"center\"><strong>{intro}</strong></p>", ""))
+        for locale, content in sections:
+            opened = " open" if locale["id"] == open_locale else ""
+            lines.extend(
+                (
+                    f"<details{opened}>",
+                    f"<summary><strong>{locale['label']}</strong></summary>",
+                    "",
+                    content,
+                    "",
+                    "</details>",
+                    "",
+                )
+            )
+    repo = repo_name(spec)
+    lines.extend(shared_release_manifest_markdown(manifest, repo, args.tag, config))
+    output = Path(args.output).expanduser().resolve()
+    write_text_atomic(output, "\n".join(lines).strip() + "\n")
+    print(output)
 
 
 def build_context(args: argparse.Namespace) -> None:
@@ -747,9 +927,42 @@ def preflight(args: argparse.Namespace) -> None:
                     fail(f"{locale['path']} needs a language link to {other['path']}")
     notes_path = Path(args.notes).expanduser().resolve()
     notes = notes_path.read_text(encoding="utf-8")
-    for heading in ("## Summary", "## Highlights", "## Compatibility and upgrade notes", "## Release files"):
-        if heading not in notes:
-            fail(f"Release notes are missing {heading}")
+    release_note_config = spec.get("release_notes", {})
+    localized_notes = release_note_locales(spec)
+    if localized_notes:
+        layout = str(release_note_config.get("layout", "accordion")).strip().lower()
+        open_locale = str(release_note_config.get("open_locale", localized_notes[0]["id"]))
+        for locale in localized_notes:
+            if locale["id"] == open_locale and layout == "anchors":
+                continue
+            marker = (
+                f'<a href="#{locale["id"]}">{locale["label"]}</a>'
+                if layout == "anchors"
+                else f"<summary><strong>{locale['label']}</strong></summary>"
+            )
+            if marker not in notes:
+                fail(f"Localized release notes are missing the {locale['label']} selector")
+        if layout == "accordion":
+            if notes.count("<details>") + notes.count("<details open>") < len(localized_notes):
+                fail("Localized release notes need one details block per language")
+            if notes.count("<details open>") != 1:
+                fail("Exactly one release-note language block must be open by default")
+        else:
+            for locale in localized_notes:
+                if f'<a id="{locale["id"]}"></a>' not in notes:
+                    fail(f"Localized release notes are missing anchor {locale['id']}")
+        file_config = release_note_config.get("file_table", {})
+        if isinstance(file_config, dict):
+            title = str(file_config.get("title", "发布文件 / Release files"))
+            if title not in notes:
+                fail("Localized release notes are missing the shared file table")
+        for artifact in artifacts:
+            if artifact["download_name"] not in notes:
+                fail(f"Localized release notes are missing artifact {artifact['download_name']}")
+    else:
+        for heading in ("## Summary", "## Highlights", "## Compatibility and upgrade notes", "## Release files"):
+            if heading not in notes:
+                fail(f"Release notes are missing {heading}")
     untracked_build = [
         Path(entry["resolved_path"]).name
         for entry in artifacts
@@ -1154,6 +1367,13 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--manifest", required=True)
     p.add_argument("--output", required=True)
     p.set_defaults(func=render_notes)
+
+    p = sub.add_parser("render-localized-notes", help="render accordion or anchor-based localized release notes")
+    p.add_argument("--spec", required=True)
+    p.add_argument("--tag", required=True)
+    p.add_argument("--manifest", required=True)
+    p.add_argument("--output", required=True)
+    p.set_defaults(func=render_localized_notes)
 
     p = sub.add_parser("preflight", help="validate release files, README, notes, and obvious secrets")
     p.add_argument("--spec", required=True)

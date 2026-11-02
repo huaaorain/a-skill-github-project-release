@@ -1,0 +1,23 @@
+## 版本摘要
+
+{{VERSION_SUMMARY}}
+
+## 主要更新
+
+- {{USER_VISIBLE_CHANGE}}
+
+## 问题修复
+
+- {{VERIFIED_FIX}}
+
+## 兼容性与升级
+
+{{COMPATIBILITY_AND_MIGRATION}}
+
+## 平台与限制
+
+{{PLATFORMS_AND_LIMITATIONS}}
+
+## 验证结果
+
+{{VALIDATION_EVIDENCE}}

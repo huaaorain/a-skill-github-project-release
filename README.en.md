@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-0.1.0-ff7a45?style=flat-square" alt="Version 0.1.0">
+  <img src="https://img.shields.io/badge/version-0.1.1-ff7a45?style=flat-square" alt="Version 0.1.1">
   <img src="https://img.shields.io/badge/python-3.10%2B-3776ab?style=flat-square&logo=python&logoColor=white" alt="Python 3.10+">
   <img src="https://img.shields.io/badge/platform-GitHub-111816?style=flat-square&logo=github&logoColor=white" alt="GitHub">
   <img src="https://img.shields.io/badge/policy-release--only-c5f36b?style=flat-square" alt="Release-only">
@@ -80,7 +80,7 @@ Publishing a finished project spans Git commits, build outputs, Release assets, 
     </tr>
     <tr>
       <td><strong>Localization</strong></td>
-      <td>Maintains complete README translations, language links, and localized release catalogs.</td>
+      <td>Maintains localized READMEs and collapsible multilingual Release notes with one language expanded by default.</td>
     </tr>
     <tr>
       <td><strong>Recovery</strong></td>
@@ -132,6 +132,7 @@ Common scoped requests:
 ```text
 Use $a-skill-github-project-release to create a Draft Release for v0.2.0.
 Use $a-skill-github-project-release to refresh the README and localized release catalogs.
+Use $a-skill-github-project-release to render collapsible multilingual Release notes.
 Use $a-skill-github-project-release to update an existing Release body without changing its assets.
 ```
 
@@ -191,7 +192,8 @@ a-skill-github-project-release/
 
 ## Release history
 
-- [0.1.0: first public release](docs/releases/v0.1.0.md)
+- [0.1.1: collapsible multilingual Release notes and shared file tables](docs/releases/v0.1.1.en.md)
+- [0.1.0: first public release](docs/releases/v0.1.0.en.md)
 
 ## All releases
 

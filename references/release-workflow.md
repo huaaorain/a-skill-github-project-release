@@ -47,6 +47,8 @@ GitHub generates source ZIP and TAR archives for each tag. Mention them as sourc
 
 Use [release-notes-contract.md](release-notes-contract.md). The notes written for the GitHub Release and the notes summarized in README must agree. The file table generated from the release manifest is authoritative for asset names, descriptions, sizes, and checksums.
 
+When `release_notes.locales` exists, update every localized source file and generate the body with `render-localized-notes`. The shared file table appears once after the language sections. The default `accordion` layout is the native GitHub alternative to tabs; it does not require JavaScript.
+
 ## Verification
 
 Before publishing:

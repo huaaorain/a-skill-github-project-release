@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-0.1.0-ff7a45?style=flat-square" alt="版本 0.1.0">
+  <img src="https://img.shields.io/badge/version-0.1.1-ff7a45?style=flat-square" alt="版本 0.1.1">
   <img src="https://img.shields.io/badge/python-3.10%2B-3776ab?style=flat-square&logo=python&logoColor=white" alt="Python 3.10+">
   <img src="https://img.shields.io/badge/platform-GitHub-111816?style=flat-square&logo=github&logoColor=white" alt="GitHub">
   <img src="https://img.shields.io/badge/policy-release--only-c5f36b?style=flat-square" alt="僅限 Release">
@@ -80,7 +80,7 @@
     </tr>
     <tr>
       <td><strong>多&#8239;語&#8239;系</strong></td>
-      <td>同步維護多份完整 README、語言切換入口與各自的版本目錄。</td>
+      <td>同步維護多語系 README，並為 Release 正文提供預設只展開一種語言的摺疊式翻譯。</td>
     </tr>
     <tr>
       <td><strong>失&#8239;敗&#8239;恢&#8239;復</strong></td>
@@ -132,6 +132,7 @@ $a-skill-github-project-release
 ```text
 使用 $a-skill-github-project-release 為 v0.2.0 建立 Draft Release。
 使用 $a-skill-github-project-release 更新 README 與三語版本目錄。
+使用 $a-skill-github-project-release 為 Release 產生三語摺疊說明。
 使用 $a-skill-github-project-release 只更新既有 Release 的說明，不修改附件。
 ```
 
@@ -191,7 +192,8 @@ a-skill-github-project-release/
 
 ## 更新記錄
 
-- [0.1.0：首個公開版本](docs/releases/v0.1.0.md)
+- [0.1.1：三語摺疊 Release 說明與統一檔案表](docs/releases/v0.1.1.zh-TW.md)
+- [0.1.0：首個公開版本](docs/releases/v0.1.0.zh-TW.md)
 
 ## 所有版本
 

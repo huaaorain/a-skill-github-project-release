@@ -76,6 +76,50 @@
     "catalog_start": "<!-- release-catalog:start -->",
     "catalog_end": "<!-- release-catalog:end -->"
   },
+  "release_notes": {
+    "layout": "accordion",
+    "open_locale": "zh-CN",
+    "prompt": "点击语言名称展开对应版本说明。 / Select a language to expand its release notes.",
+    "locales": [
+      {
+        "id": "zh-CN",
+        "label": "简体中文",
+        "path_template": "docs/releases/{tag}.zh-CN.md"
+      },
+      {
+        "id": "zh-TW",
+        "label": "繁體中文",
+        "path_template": "docs/releases/{tag}.zh-TW.md"
+      },
+      {
+        "id": "en",
+        "label": "English",
+        "path_template": "docs/releases/{tag}.en.md"
+      }
+    ],
+    "file_table": {
+      "title": "发布文件 / Release files",
+      "description_locales": ["zh-CN", "en"],
+      "columns": {
+        "file": "文件 / File",
+        "role": "类型 / Role",
+        "purpose": "用途 / Purpose",
+        "size": "大小 / Size",
+        "download": "下载 / Download",
+        "download_link": "Download"
+      }
+    },
+    "metadata": {
+      "title": "校验与元数据 / Checksums and metadata"
+    },
+    "source": {
+      "title": "源代码 / Source",
+      "commit_label": "提交 / Commit",
+      "source_zip_label": "源代码 ZIP / Source ZIP",
+      "source_tar_label": "源代码 TAR.GZ / Source TAR.GZ",
+      "verify": "下载后请使用 `SHA256SUMS.txt` 校验文件完整性。  \nVerify downloaded files against `SHA256SUMS.txt`."
+    }
+  },
   "screenshots": [
     {
       "path": "docs/assets/release-flow.svg",
@@ -87,6 +131,10 @@
       "path": "release-build/a-skill-github-project-release.zip",
       "role": "skill",
       "description": "完整 skill 包，包括 SKILL.md、scripts、references、assets 与 README。",
+      "localized_descriptions": {
+        "zh-CN": "完整 skill 包，包括说明、脚本、参考文档、模板与测试。",
+        "en": "Complete skill package with documentation, scripts, references, templates, and tests."
+      },
       "required": true,
       "download_name": "a-skill-github-project-release.zip"
     }
