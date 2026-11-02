@@ -201,14 +201,26 @@ a-skill-github-project-release/
 ## 所有版本
 
 <!-- release-catalog:start -->
-最新版本: [A Skill: Github Project Release 0.1.0](https://github.com/huaaorain/a-skill-github-project-release/releases/tag/v0.1.0)
+最新版本: [GitHub Project Release 0.1.1](https://github.com/huaaorain/a-skill-github-project-release/releases/tag/v0.1.1)
 
 | 版本 | 发布时间 | 发布说明 |
 | --- | --- | --- |
+| `v0.1.1` | 2026-11-02 | [打开](https://github.com/huaaorain/a-skill-github-project-release/releases/tag/v0.1.1) |
 | `v0.1.0` | 2026-10-27 | [打开](https://github.com/huaaorain/a-skill-github-project-release/releases/tag/v0.1.0) |
 
 <details>
 <summary><strong>全部版本下载</strong></summary>
+
+### GitHub Project Release 0.1.1
+
+发布说明: [打开](https://github.com/huaaorain/a-skill-github-project-release/releases/tag/v0.1.1)
+
+- [a-skill-github-project-release.zip](https://github.com/huaaorain/a-skill-github-project-release/releases/download/v0.1.1/a-skill-github-project-release.zip) — 56.9 KB
+- [FILE_MANIFEST.md](https://github.com/huaaorain/a-skill-github-project-release/releases/download/v0.1.1/FILE_MANIFEST.md) — 502 B
+- [release-manifest.json](https://github.com/huaaorain/a-skill-github-project-release/releases/download/v0.1.1/release-manifest.json) — 1004 B
+- [SHA256SUMS.txt](https://github.com/huaaorain/a-skill-github-project-release/releases/download/v0.1.1/SHA256SUMS.txt) — 101 B
+- [源代码（zip）](https://github.com/huaaorain/a-skill-github-project-release/archive/refs/tags/v0.1.1.zip)
+- [源代码（tar.gz）](https://github.com/huaaorain/a-skill-github-project-release/archive/refs/tags/v0.1.1.tar.gz)
 
 ### A Skill: Github Project Release 0.1.0
 
