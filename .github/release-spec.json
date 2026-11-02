@@ -2,7 +2,7 @@
   "schema_version": 1,
   "project": {
     "name": "A Skill: Github Project Release",
-    "description": "A Codex skill for publishing projects to GitHub and maintaining versioned releases, READMEs, screenshots, and download catalogs.",
+    "description": "A Codex skill for publishing GitHub projects with release-only assets, multilingual READMEs, and collapsible localized release notes.",
     "repository": "huaaorain/a-skill-github-project-release",
     "homepage": "",
     "topics": [
@@ -11,7 +11,9 @@
       "release-automation",
       "github-releases",
       "readme",
-      "project-publishing"
+      "project-publishing",
+      "localization",
+      "release-notes"
     ]
   },
   "release": {

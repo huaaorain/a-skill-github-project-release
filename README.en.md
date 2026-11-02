@@ -184,7 +184,7 @@ a-skill-github-project-release/
 
 ## Known limitations
 
-- GitHub README files do not execute JavaScript, so language links open separate localized files.
+- GitHub Markdown cannot execute JavaScript: README language links open separate localized files, while Release notes use collapsible panels instead of true tabs.
 - Automatic screenshots require a safe demo mode that the project can run.
 - Code diffs cannot fully determine product impact; release notes still need a review pass.
 - A GitHub Release asset is normally limited to 2 GiB per file.
