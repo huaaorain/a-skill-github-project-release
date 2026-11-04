@@ -1,5 +1,22 @@
 # Changelog
 
+## [0.1.2] - 2026-11-04
+
+### Added
+
+- Semantic icon guidance inspired by the feature presentation used in
+  `linshenkx/prompt-optimizer`.
+- A verified-advantages block in the README template using `✅` for
+  evidence-backed capabilities.
+- Stable explicit anchors for icon-prefixed headings used by README navigation.
+
+### Changed
+
+- Updated the template and all three localized project pages with consistent
+  icons for features, installation, workflow, safety, downloads, and metadata.
+- Clarified that icons should stay sparse and outside ordinary paragraphs,
+  code, file paths, and tables.
+
 ## [0.1.1] - 2026-11-02
 
 ### Added

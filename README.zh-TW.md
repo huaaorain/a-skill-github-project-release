@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-0.1.1-ff7a45?style=flat-square" alt="版本 0.1.1">
+  <img src="https://img.shields.io/badge/version-0.1.2-ff7a45?style=flat-square" alt="版本 0.1.2">
   <img src="https://img.shields.io/badge/python-3.10%2B-3776ab?style=flat-square&logo=python&logoColor=white" alt="Python 3.10+">
   <img src="https://img.shields.io/badge/platform-GitHub-111816?style=flat-square&logo=github&logoColor=white" alt="GitHub">
   <img src="https://img.shields.io/badge/policy-release--only-c5f36b?style=flat-square" alt="僅限 Release">
@@ -39,7 +39,7 @@
 
 ---
 
-## 解決的問題
+## 💡 解決的問題
 
 專案完成後的發佈工作分散在 Git 提交、建置產物、Release 附件、README、版本說明與歷史下載目錄中。手動處理容易產生：
 
@@ -52,7 +52,15 @@
 
 **A Skill: Github Project Release** 將這些步驟整理成受控流程，預設將原始碼放入 Git，而可執行檔與分發檔案只上傳到 Release。
 
-## 核心能力
+### ✅ 關鍵優勢
+
+- ✅ 原始碼與可執行檔分開管理，倉庫保持可維護，使用者仍能直接下載建置產物。
+- ✅ 標籤、Release、附件清單與版本目錄都來自同一個確定 commit，失敗後保留可檢查狀態。
+- ✅ README 與 Release 說明支援简体中文、繁體中文和 English，並保持下載入口同步。
+
+<a id="核心能力"></a>
+
+## ✨ 核心能力
 
 <table>
   <thead>
@@ -89,7 +97,7 @@
   </tbody>
 </table>
 
-## 發佈流程
+## 🚀 發佈流程
 
 ![A Skill: Github Project Release workflow](docs/assets/release-flow.svg)
 
@@ -97,7 +105,9 @@ _上圖描述專案實際的發佈流程，不是軟體介面截圖。_
 
 每個版本都經過「建置與測試 → 文件與圖片 → 文件清單 → 預檢 → Draft Release → 驗證 → 發佈 → 版本目錄更新」。失敗時停在可檢查狀態，不透過刪除標籤或覆蓋既有版本恢復。
 
-## 安裝
+<a id="安裝"></a>
+
+## 🚀 安裝
 
 將本倉庫複製或解壓到：
 
@@ -119,7 +129,9 @@ $a-skill-github-project-release
 
 或從 Releases 下載 `github-project-release.zip`，解壓後將整個 `a-skill-github-project-release/` 目錄放入 skills 路徑。不要只複製 `SKILL.md`，腳本、範本與參考文件都屬於工作流程的一部分。
 
-## 使用方式
+<a id="使用方式"></a>
+
+## 💡 使用方式
 
 在專案完成程式碼、測試與建置後，對 Codex 說：
 
@@ -136,7 +148,7 @@ $a-skill-github-project-release
 使用 $a-skill-github-project-release 只更新既有 Release 的說明，不修改附件。
 ```
 
-## 安全邊界
+## 🛡️ 安全邊界
 
 - 建立倉庫、推送提交、發佈 Release 前分別取得授權。
 - 預設建立 Draft Release，驗證後才公開。
@@ -147,7 +159,7 @@ $a-skill-github-project-release
 - 沒有真實介面截圖時使用明確標示的流程圖，不把示意圖當成截圖。
 - 專案首次公開發佈預設使用 `0.1.0`。
 
-## 需求
+## ✅ 需求
 
 - Python 3.10 或更新版本
 - Git
@@ -167,7 +179,7 @@ python .\scripts\test_release_manager.py
 python .\scripts\release_manager.py --help
 ```
 
-## 專案結構
+## 🧩 專案結構
 
 ```text
 a-skill-github-project-release/
@@ -182,7 +194,7 @@ a-skill-github-project-release/
 
 `SKILL.md` 保留核心決策與安全邊界；詳細流程、README 規則、截圖要求與發佈說明契約依需要載入。`release_manager.py` 使用 Python 標準函式庫、Git 與 GitHub API，不依賴 GitHub CLI。
 
-## 已知限制
+## ⚠️ 已知限制
 
 - GitHub Markdown 不執行 JavaScript：README 語言切換會開啟對應檔案，Release 語言使用摺疊面板而不是真正標籤頁。
 - 自動截圖取決於專案是否提供可安全執行的展示模式。
@@ -190,12 +202,15 @@ a-skill-github-project-release/
 - GitHub 單一 Release 附件通常不能超過 2 GiB。
 - 目前倉庫尚未宣告開源授權。
 
-## 更新記錄
+## 📝 更新記錄
 
+- [0.1.2：語意圖示、關鍵優勢與穩定的章節導覽](docs/releases/v0.1.2.zh-TW.md)
 - [0.1.1：三語摺疊 Release 說明與統一檔案表](docs/releases/v0.1.1.zh-TW.md)
 - [0.1.0：首個公開版本](docs/releases/v0.1.0.zh-TW.md)
 
-## 所有版本
+<a id="所有版本"></a>
+
+## 📦 所有版本
 
 <!-- release-catalog:start -->
 最新版本: [A Skill: Github Project Release 0.1.1](https://github.com/huaaorain/a-skill-github-project-release/releases/tag/v0.1.1)
@@ -233,13 +248,13 @@ a-skill-github-project-release/
 </details>
 <!-- release-catalog:end -->
 
-## 致謝
+## 🙏 致謝
 
 - [GitHub REST API](https://docs.github.com/rest)
 - [Best-README-Template](https://github.com/othneildrew/Best-README-Template)
 - [awesome-readme-template](https://github.com/Louis3797/awesome-readme-template)
 - [Standard Readme](https://github.com/RichardLitt/standard-readme)
 
-## License
+## 📄 License
 
 目前倉庫尚未指定開源授權。在加入授權前，請勿直接將此 skill 作為商業或再發佈專案的一部分使用。

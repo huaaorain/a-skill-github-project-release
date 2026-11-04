@@ -1,6 +1,6 @@
 # README production guide
 
-Use `assets/README.template.md` as the starting structure. The visual reference is [Louis3797/awesome-readme-template](https://github.com/Louis3797/awesome-readme-template), but adapt the result to the actual product and omit irrelevant template sections.
+Use `assets/README.template.md` as the starting structure. Use [Louis3797/awesome-readme-template](https://github.com/Louis3797/awesome-readme-template) for overall section structure and [linshenkx/prompt-optimizer](https://github.com/linshenkx/prompt-optimizer) for its sparse, semantic emoji style. Adapt the result to the actual product and omit irrelevant template sections.
 
 ## Required information order
 
@@ -32,6 +32,10 @@ Use `README.md` as the primary version unless the repository already has another
 ## Visual rules
 
 - Use one deliberate visual direction that matches the product; do not stack interchangeable blue badges and generic glowing cards.
+- Use at most one leading emoji per major heading or feature/advantage bullet, and keep the same icon meaning across all localized READMEs. A practical set is `✨` features, `🚀` installation or release workflow, `🧩` integrations or project structure, `🖼️` screenshots, `🛡️` security or privacy, `🌐` localization, `📦` downloads or artifacts, and `✅` verified advantages.
+- Reserve `✅` for claims that are evidenced by implemented behavior, tests, compatibility, or availability. Do not use it as decoration or on unverified marketing claims.
+- Do not put emoji inside ordinary paragraphs, code, file paths, tables, or every line of a long list. The icons should make scanning faster, not compete with the content.
+- When adding an icon to a heading that is used by navigation, add an explicit HTML anchor such as `<a id="installation"></a>` immediately above it; do not rely on GitHub's generated anchor for an emoji-prefixed title.
 - Prefer real screenshots, terminal captures, or diagrams over decorative stock imagery.
 - Keep badges limited to useful facts such as version, platform, runtime, or license.
 - Put long technical details in `<details>` blocks so the first viewport remains useful.

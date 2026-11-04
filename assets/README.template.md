@@ -34,11 +34,19 @@
 
 ---
 
-## Overview
+## 💡 Overview
 
 {{WHAT_THE_PROJECT_DOES}}
 
-## Features
+## ✅ Key advantages
+
+- ✅ {{VERIFIED_ADVANTAGE_ONE}}
+- ✅ {{VERIFIED_ADVANTAGE_TWO}}
+- ✅ {{VERIFIED_ADVANTAGE_THREE}}
+
+<a id="features"></a>
+
+## ✨ Features
 
 <table>
   <colgroup>
@@ -64,29 +72,31 @@
 
 _Caption the screenshot with the real workflow it demonstrates._
 
-### {{FEATURE_GROUP_ONE_WITH_IMAGE}}
+### 🧩 {{FEATURE_GROUP_ONE_WITH_IMAGE}}
 
 {{CONCRETE_BEHAVIOR_AND_USER_OUTCOME}}
 
 ![Feature evidence](docs/assets/feature-two.png)
 
-### {{FEATURE_GROUP_TWO_WITH_IMAGE}}
+### 🖼️ {{FEATURE_GROUP_TWO_WITH_IMAGE}}
 
 {{CONCRETE_BEHAVIOR_AND_USER_OUTCOME}}
 
-## Screenshots
+## 🖼️ Screenshots
 
 | Workflow | Preview |
 | --- | --- |
 | {{REAL_WORKFLOW_NAME}} | ![Screenshot](docs/assets/main-ui.png) |
 
-## Technology
+## 🧩 Technology
 
 - {{LANGUAGE_OR_FRAMEWORK}}
 - {{PLATFORM_OR_RUNTIME}}
 - {{STORAGE_OR_EXTERNAL_SERVICE}}
 
-## Installation
+<a id="installation"></a>
+
+## 🚀 Installation
 
 ### Requirements
 
@@ -102,48 +112,50 @@ _Caption the screenshot with the real workflow it demonstrates._
 > [!IMPORTANT]
 > {{REQUIRED_FILES_OR_SAFETY_NOTICE}}
 
-## All Releases
+<a id="all-releases"></a>
+
+## 📦 All Releases
 
 <!-- release-catalog:start -->
 The release catalog is generated during publishing.
 <!-- release-catalog:end -->
 
-## Usage
+## 💡 Usage
 
 {{MINIMAL_REAL_EXAMPLE}}
 
-## Data and privacy
+## 🛡️ Data and privacy
 
 {{WHAT_IS_STORED_LOCALLY_AND_WHAT_IS_SENT_OVER_NETWORK}}
 
-## Limitations
+## ⚠️ Limitations
 
 - {{KNOWN_LIMITATION}}
 
-## FAQ
+## ❓ FAQ
 
 ### {{REAL_USER_QUESTION}}
 
 {{DIRECT_ANSWER}}
 
-## Build from source
+## 🔧 Build from source
 
 ```text
 {{BUILD_COMMANDS}}
 ```
 
-## Contributing
+## 🤝 Contributing
 
 {{REAL_CONTRIBUTION_ENTRY_POINT}}
 
-## Changelog
+## 📝 Changelog
 
 See [CHANGELOG.md](CHANGELOG.md) and the Releases page.
 
-## Acknowledgements
+## 🙏 Acknowledgements
 
 - {{THIRD_PARTY_COMPONENT_AND_LICENSE}}
 
-## License
+## 📄 License
 
 {{LICENSE_STATUS}}
