@@ -29,6 +29,21 @@ When the user asks for multiple languages, make each version a complete README r
 
 Use `README.md` as the primary version unless the repository already has another convention. Keep section order, screenshots, release catalog, and download URLs synchronized. Declare every translated file in `readme.locales`; the helper updates catalogs in all listed files and preflight checks all of them.
 
+## Version consistency
+
+- Treat the release tag as the only source of truth for the project's current version.
+- Declare every visible current-version surface under `version_surfaces` in `.github/release-spec.json`, including each localized README badge and any text-based banner, hero, or screenshot SVG that displays a version.
+- Use a narrow pattern with a named `version` capture group. Prefer `badge/version-(?P<version>\d+\.\d+\.\d+)` for a badge and `>v?(?P<version>\d+\.\d+\.\d+)</text>` for an SVG footer.
+- Include older versions only in release history or catalog content. Do not use a broad pattern that captures every historical version on the page.
+- When the version changes, update the tag, README badges, banner or hero text, release notes, metadata, and screenshots before running preflight.
+- Preflight can inspect SVG and other UTF-8 text images but cannot OCR a PNG or JPEG. Visually review raster screenshots that display the current version.
+
+## Optional capabilities
+
+- Prefix an optional integration or extension with `*` in every localized feature label or heading, for example `* 本地 LLM`, `* GitHub 登录`, or `* Local LLM`.
+- Explain the marker once near the first feature list, for example `* 可选功能，不安装也不影响核心功能使用。` or `* Optional; core features continue to work without it.`
+- Use `*` only when the core project can be installed and used without that capability. Required runtimes, network access, credentials needed for normal operation, and core installation steps stay unstarred.
+
 ## Visual rules
 
 - Use one deliberate visual direction that matches the product; do not stack interchangeable blue badges and generic glowing cards.

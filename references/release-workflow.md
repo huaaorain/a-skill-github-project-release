@@ -7,7 +7,7 @@ Use this order so the tag, source commit, built artifacts, README, and release b
 1. Determine the next version and verify that its tag and Release do not already exist. For a project with no published release, use `0.1.0` unless the user explicitly chooses another initial version.
 2. Build and test from the intended source commit.
 3. Capture or select real feature images and place them under `docs/assets/`.
-4. Update README, installation instructions, compatibility notes, and the surface-level download information.
+4. Update README, installation instructions, compatibility notes, the surface-level download information, and every `version_surfaces` entry.
 5. Create or update `.github/release-spec.json` with every release artifact, its role, description, required status, and stable download filename.
 6. Update README and ensure `release-build/` is ignored.
 7. Commit the source, documentation, screenshots, and release spec.
@@ -60,6 +60,9 @@ Before publishing:
 - each asset name is unique and stable enough for links;
 - release notes have change, compatibility, and file sections;
 - `SHA256SUMS.txt` matches the uploaded bytes;
+- every declared version surface exists and matches the release tag;
+- version labels inside raster screenshots have been reviewed visually;
+- optional capabilities use `*` consistently and required capabilities remain unstarred;
 - README contains at least one real feature image;
 - README image and release links resolve;
 - the Draft Release tag matches the intended commit.

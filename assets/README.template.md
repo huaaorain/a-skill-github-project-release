@@ -62,11 +62,14 @@
   <tbody>
     <tr>
       <!-- For short CJK labels, join characters with &#8239; so GitHub does not orphan one character. -->
+      <!-- Prefix only optional integrations or extensions with *, for example: * Local LLM. -->
       <td><strong>{{SHORT_MODULE_LABEL}}</strong></td>
       <td>{{FEATURE_OUTCOME}}</td>
     </tr>
   </tbody>
 </table>
+
+> `*` Optional: {{OPTIONAL_CAPABILITY_NOTE_BECAUSE_CORE_FEATURES_WORK_WITHOUT_IT}}
 
 ![Primary workflow](docs/assets/main-ui.png)
 

@@ -23,6 +23,24 @@
     "prerelease": false
   },
   "artifact_policy": "release-only",
+  "version_surfaces": [
+    {
+      "path": "README.md",
+      "pattern": "badge/version-(?P<version>\\d+\\.\\d+\\.\\d+)"
+    },
+    {
+      "path": "README.zh-TW.md",
+      "pattern": "badge/version-(?P<version>\\d+\\.\\d+\\.\\d+)"
+    },
+    {
+      "path": "README.en.md",
+      "pattern": "badge/version-(?P<version>\\d+\\.\\d+\\.\\d+)"
+    },
+    {
+      "path": "docs/assets/readme-banner.svg",
+      "pattern": ">v?(?P<version>\\d+\\.\\d+\\.\\d+)</text>"
+    }
+  ],
   "readme": {
     "path": "README.md",
     "locales": [
@@ -132,10 +150,10 @@
     {
       "path": "release-build/a-skill-github-project-release.zip",
       "role": "skill",
-      "description": "完整 skill 包，包括 SKILL.md、scripts、references、assets 与 README。",
+      "description": "完整 skill 包，包括版本一致性预检、可选功能标记、脚本、模板、参考文档与 README。",
       "localized_descriptions": {
-        "zh-CN": "完整 skill 包，包括说明、脚本、参考文档、模板与测试。",
-        "en": "Complete skill package with documentation, scripts, references, templates, and tests."
+        "zh-CN": "完整 skill 包，包括版本一致性预检、可选功能标记、脚本、参考文档、模板与测试。",
+        "en": "Complete skill package with version-surface preflight, optional capability markers, scripts, references, templates, and tests."
       },
       "required": true,
       "download_name": "a-skill-github-project-release.zip"

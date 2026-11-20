@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-0.1.2-ff7a45?style=flat-square" alt="版本 0.1.2">
+  <img src="https://img.shields.io/badge/version-0.2.0-ff7a45?style=flat-square" alt="版本 0.2.0">
   <img src="https://img.shields.io/badge/python-3.10%2B-3776ab?style=flat-square&logo=python&logoColor=white" alt="Python 3.10+">
   <img src="https://img.shields.io/badge/platform-GitHub-111816?style=flat-square&logo=github&logoColor=white" alt="GitHub">
   <img src="https://img.shields.io/badge/policy-release--only-c5f36b?style=flat-square" alt="僅限 Release">
@@ -89,6 +89,14 @@
     <tr>
       <td><strong>多&#8239;語&#8239;系</strong></td>
       <td>同步維護多語系 README，並為 Release 正文提供預設只展開一種語言的摺疊式翻譯。</td>
+    </tr>
+    <tr>
+      <td><strong>版&#8239;本&#8239;一&#8239;致</strong></td>
+      <td>登記 README 徽章、橫幅與文字圖片中的目前版本，預檢發現缺少或過期時阻止發佈。</td>
+    </tr>
+    <tr>
+      <td><strong>可&#8239;選&#8239;標&#8239;記</strong></td>
+      <td>為非必要的登入、模型或擴充功能統一加上 <code>*</code> 標記，並說明它們不影響核心功能。</td>
     </tr>
     <tr>
       <td><strong>失&#8239;敗&#8239;恢&#8239;復</strong></td>
@@ -204,6 +212,7 @@ a-skill-github-project-release/
 
 ## 📝 更新記錄
 
+- [0.2.0：版本顯示位置預檢與可選功能標記](docs/releases/v0.2.0.zh-TW.md)
 - [0.1.2：語意圖示、關鍵優勢與穩定的章節導覽](docs/releases/v0.1.2.zh-TW.md)
 - [0.1.1：三語摺疊 Release 說明與統一檔案表](docs/releases/v0.1.1.zh-TW.md)
 - [0.1.0：首個公開版本](docs/releases/v0.1.0.zh-TW.md)

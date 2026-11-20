@@ -35,13 +35,23 @@ class ReleaseManagerSmokeTests(unittest.TestCase):
         (self.root / "src" / "app.txt").write_text("source\n", encoding="utf-8")
         (self.root / "docs" / "assets").mkdir(parents=True)
         (self.root / "docs" / "assets" / "main.png").write_bytes(b"\x89PNG\r\n\x1a\nfixture")
+        (self.root / "docs" / "assets" / "banner.svg").write_text(
+            '<svg><text>v0.1.0</text></svg>\n',
+            encoding="utf-8",
+        )
         (self.root / "README.md").write_text(
-            "# 示例项目\n\n[English](README.en.md)\n\n![Main](docs/assets/main.png)\n\n"
+            "# 示例项目\n\n[English](README.en.md)\n\n"
+            "![Banner](docs/assets/banner.svg)\n\n"
+            '<img src="https://img.shields.io/badge/version-0.1.0-test" alt="Version 0.1.0">\n\n'
+            "![Main](docs/assets/main.png)\n\n"
             "<!-- release-catalog:start -->\nempty\n<!-- release-catalog:end -->\n",
             encoding="utf-8",
         )
         (self.root / "README.en.md").write_text(
-            "# Demo\n\n[简体中文](README.md)\n\n![Main](docs/assets/main.png)\n\n"
+            "# Demo\n\n[简体中文](README.md)\n\n"
+            "![Banner](docs/assets/banner.svg)\n\n"
+            '<img src="https://img.shields.io/badge/version-0.1.0-test" alt="Version 0.1.0">\n\n'
+            "![Main](docs/assets/main.png)\n\n"
             "<!-- release-catalog:start -->\nempty\n<!-- release-catalog:end -->\n",
             encoding="utf-8",
         )
@@ -50,6 +60,20 @@ class ReleaseManagerSmokeTests(unittest.TestCase):
         spec = json.loads(self.spec_path.read_text(encoding="utf-8"))
         spec["project"]["description"] = "A test project."
         spec["project"]["topics"] = ["testing"]
+        spec["version_surfaces"] = [
+            {
+                "path": "README.md",
+                "pattern": r"badge/version-(?P<version>\d+\.\d+\.\d+)",
+            },
+            {
+                "path": "README.en.md",
+                "pattern": r"badge/version-(?P<version>\d+\.\d+\.\d+)",
+            },
+            {
+                "path": "docs/assets/banner.svg",
+                "pattern": r">v?(?P<version>\d+\.\d+\.\d+)</text>",
+            },
+        ]
         spec["readme"]["locales"] = [
             {
                 "path": "README.md",
@@ -214,6 +238,33 @@ class ReleaseManagerSmokeTests(unittest.TestCase):
         )
         self.assertNotEqual(result.returncode, 0)
         self.assertIn("first release must use v0.1.0", result.stderr)
+
+    def test_preflight_rejects_stale_version_surface(self) -> None:
+        (self.root / "docs" / "assets" / "banner.svg").write_text(
+            '<svg><text>v0.0.9</text></svg>\n',
+            encoding="utf-8",
+        )
+        notes = self.root / "release-build" / "notes.md"
+        notes.write_text(
+            "## Summary\n\nInitial release.\n\n"
+            "## Highlights\n\n- Works.\n\n"
+            "## Compatibility and upgrade notes\n\nNone.\n\n"
+            "## Release files\n\nPending.\n",
+            encoding="utf-8",
+        )
+        result = self.cli(
+            "preflight",
+            "--spec",
+            str(self.spec_path),
+            "--tag",
+            "v0.1.0",
+            "--notes",
+            str(notes),
+            check=False,
+        )
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("Version surface is stale", result.stderr)
+        self.assertIn("expected 0.1.0, found 0.0.9", result.stderr)
 
     def test_catalog_updates_only_marker_block(self) -> None:
         releases = [

@@ -14,6 +14,16 @@
     "prerelease": false
   },
   "artifact_policy": "release-only",
+  "version_surfaces": [
+    {
+      "path": "README.md",
+      "pattern": "badge/version-(?P<version>\\d+\\.\\d+\\.\\d+)"
+    },
+    {
+      "path": "docs/assets/project-banner.svg",
+      "pattern": ">v?(?P<version>\\d+\\.\\d+\\.\\d+)</text>"
+    }
+  ],
   "readme": {
     "path": "README.md",
     "locales": [

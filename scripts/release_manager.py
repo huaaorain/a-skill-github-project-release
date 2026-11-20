@@ -192,6 +192,28 @@ def release_note_locales(spec: dict) -> list[dict]:
     return result
 
 
+def version_surfaces(spec: dict) -> list[dict]:
+    surfaces = spec.get("version_surfaces", [])
+    if not isinstance(surfaces, list):
+        fail("version_surfaces must be an array")
+    result: list[dict] = []
+    for entry in surfaces:
+        if not isinstance(entry, dict):
+            fail("each version surface must be an object")
+        path = str(entry.get("path", "")).strip()
+        pattern = str(entry.get("pattern", "")).strip()
+        if not path or not pattern:
+            fail("each version surface needs path and pattern")
+        try:
+            compiled = re.compile(pattern)
+        except re.error as exc:
+            fail(f"invalid version surface pattern for {path}: {exc}")
+        if "version" not in compiled.groupindex:
+            fail(f"version surface pattern for {path} needs a named 'version' group")
+        result.append({"path": path, "pattern": compiled})
+    return result
+
+
 def repo_name(spec: dict) -> str:
     value = str(spec.get("project", {}).get("repository", "")).strip()
     if not re.fullmatch(r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", value):
@@ -411,6 +433,7 @@ def init_spec(args: argparse.Namespace) -> None:
             "prerelease": False,
         },
         "artifact_policy": "release-only",
+        "version_surfaces": [],
         "readme": {
             "path": "README.md",
             "catalog_start": CATALOG_START,
@@ -896,6 +919,33 @@ def preflight(args: argparse.Namespace) -> None:
         )
     if git_value(root, "rev-parse", "-q", "--verify", f"refs/tags/{tag}"):
         fail(f"Tag already exists: {tag}")
+    surfaces = version_surfaces(spec)
+    if not surfaces:
+        fail(
+            "version_surfaces must declare every current-version display, "
+            "including README badges and text-based banner or screenshot files"
+        )
+    expected_version = tag[len(tag_prefix) :] if tag_prefix else tag
+    for surface in surfaces:
+        path = safe_project_path(root, surface["path"], "version surface")
+        if not path.is_file():
+            fail(f"Version surface is missing: {surface['path']}")
+        try:
+            text = path.read_text(encoding="utf-8")
+        except UnicodeDecodeError:
+            fail(f"Version surface must be UTF-8 text: {surface['path']}")
+        values = [
+            match.group("version").strip().removeprefix(tag_prefix)
+            for match in surface["pattern"].finditer(text)
+        ]
+        if not values:
+            fail(f"Version surface has no matching version text: {surface['path']}")
+        stale = sorted(set(values) - {expected_version})
+        if stale:
+            fail(
+                f"Version surface is stale in {surface['path']}: "
+                f"expected {expected_version}, found {', '.join(stale)}"
+            )
     locales = readme_locales(spec)
     start = spec["readme"].get("catalog_start", CATALOG_START)
     end = spec["readme"].get("catalog_end", CATALOG_END)

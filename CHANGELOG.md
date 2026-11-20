@@ -1,5 +1,22 @@
 # Changelog
 
+## [0.2.0] - 2026-11-20
+
+### Changed
+
+- Preflight now requires `version_surfaces` and validates every declared
+  current-version display, including README badges and text-based banner or
+  screenshot files.
+- README guidance now marks optional integrations and extensions with `*`
+  while leaving required capabilities unstarred.
+- The release-spec examples and initializer expose the new version-surface
+  configuration.
+
+### Fixed
+
+- Corrected the skill banner's stale `v0.1.0` label and added automated checks
+  so future banner, badge, and text-image versions must match the release tag.
+
 ## [0.1.2] - 2026-11-04
 
 ### Added

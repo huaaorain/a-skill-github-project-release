@@ -62,11 +62,15 @@ The version must be unambiguous before editing release files. Prefer Semantic Ve
 
 For a project's first public release, use `0.1.0` by default. Do not silently promote an initial release to `1.0.0`; change `release.initial_version` only when the user explicitly requests another starting version.
 
+Before updating project documents, add every current-version display to `version_surfaces` in `.github/release-spec.json`. This includes README badges and text-based banner, hero, or screenshot files whose visible version must equal the release tag. Preflight rejects a missing, unmatched, or stale surface; do not configure patterns that also match historical release entries. Visually inspect raster screenshots because text preflight cannot read versions rendered inside PNG or JPEG files.
+
 ### 4. Prepare project documents
 
 Build a real feature introduction with at least one local image under `docs/assets/`. Explain what is visible and tie every image to a real feature, workflow, interface, or architecture component.
 
 Update the README with real installation steps, the latest downloads, a screenshot-led feature overview, and the generated release catalog markers. Add `release-build/` to `.gitignore`; it contains generated manifests, notes, and staged artifacts. Use the README template as a content checklist, not as generic boilerplate.
+
+Prefix optional integrations and extensions with `*` in their feature labels or headings, then explain the marker once near the feature list. Apply the same convention to every locale. Do not mark required runtimes, core installation steps, or capabilities needed for basic use as optional.
 
 When multiple languages are requested, create a complete README for each language, add a compact switcher below the badges, and declare every file under `readme.locales`. Keep the same screenshots, download URLs, section order, and catalog markers across translations.
 
