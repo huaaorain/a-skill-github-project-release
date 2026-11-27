@@ -5,7 +5,7 @@ Use this flow only when no target GitHub repository exists.
 ## Preconditions
 
 1. Inspect the project without assuming its stack. Run its tests and a production build.
-2. Confirm the project has an appropriate `.gitignore`, README, license status, and no secrets or personal runtime data.
+2. Read `security-check.md`. Review `.gitignore`, README, runtime data, artifacts, and screenshots; run the security check before staging or pushing files.
 3. Confirm the repository owner, name, visibility, description, homepage, and topics with the user.
 4. Confirm that executables and distributable extensions will be Release assets, not Git files.
 5. Start the first public release at `0.1.0` unless the user explicitly chooses another initial version. Never assume `1.0.0`.
@@ -14,6 +14,10 @@ Use this flow only when no target GitHub repository exists.
    ```powershell
    python "$SkillDir/scripts/release_manager.py" init --root PROJECT_ROOT --repo OWNER/REPO
    ```
+
+## License decision
+
+Read `license-selection.md`. If the project has no license, present the common choices and ask the user to choose. Do not push a public repository under an assumed license. If the user wants to prohibit selling or commercial use, explain that this is source-available or proprietary rather than OSI open source.
 
 ## Create and push
 
@@ -27,7 +31,9 @@ Initialize the local repository only when necessary. Use `main` by default unles
 
 ```powershell
 git init -b main
-git add .
+python "$SkillDir/scripts/release_manager.py" security-check --spec .github/release-spec.json
+git status --short
+git add SOURCE_AND_DOCUMENTATION_PATHS
 git commit -m "Initial release"
 git remote add origin https://github.com/OWNER/REPO.git
 git push -u origin main

@@ -15,6 +15,7 @@ Publish source code to Git, keep executables and distributable extensions in Git
 - Prefer a Draft Release. Creating a repository, pushing commits, changing repository visibility, publishing a release, and changing an existing tag are external mutations: obtain fresh user authorization immediately before each category of action.
 - Never force-push, move a published tag, overwrite a release, or delete a release asset to recover from a failure.
 - Never present generated artwork as a real product screenshot. Use real UI/CLI captures or clearly labeled diagrams.
+- Never choose or change a software license silently. Before a first public upload, present the license choices and wait for the user's decision.
 
 ## Inputs
 
@@ -39,6 +40,8 @@ When the project is on another shell, use the equivalent path expansion.
 - Read [references/release-workflow.md](references/release-workflow.md) for every new version or release documentation refresh.
 - Read [references/media-and-screenshots.md](references/media-and-screenshots.md) before collecting the functional images.
 - Read [references/release-notes-contract.md](references/release-notes-contract.md) before writing change summaries.
+- Read [references/security-check.md](references/security-check.md) before the first upload and before every release.
+- Read [references/license-selection.md](references/license-selection.md) when no license exists or the user asks about licensing.
 - For README structure and content, read [references/readme-template.md](references/readme-template.md) and start from [assets/README.template.md](assets/README.template.md).
 
 ### 2. Inspect and build
@@ -46,6 +49,14 @@ When the project is on another shell, use the equivalent path expansion.
 Detect the project type and supported platforms, run its tests and production build, and identify the exact user-facing artifacts. Build from the same commit that will be tagged. Do not describe commands or features that the project cannot demonstrate.
 
 Use `$SkillDir/scripts/release_manager.py archive` when a release artifact must be represented by a directory archive. Never upload a directory directly; GitHub Release assets are files.
+
+Run the security check before the first commit, push, or asset upload:
+
+```powershell
+python "$SkillDir/scripts/release_manager.py" security-check --spec .github/release-spec.json
+```
+
+Use `--root .` only for a preliminary source-only check when artifacts do not exist yet. Stop on any real finding, rotate the credential, and never print its value.
 
 ### 3. Establish repository and version context
 
@@ -71,6 +82,8 @@ Build a real feature introduction with at least one local image under `docs/asse
 Update the README with real installation steps, the latest downloads, a screenshot-led feature overview, and the generated release catalog markers. Add `release-build/` to `.gitignore`; it contains generated manifests, notes, and staged artifacts. Use the README template as a content checklist, not as generic boilerplate.
 
 Prefix optional integrations and extensions with `*` in their feature labels or headings, then explain the marker once near the feature list. Apply the same convention to every locale. Do not mark required runtimes, core installation steps, or capabilities needed for basic use as optional.
+
+If a public project has no license, present the license choices from `references/license-selection.md` and wait for the user's selection. Preserve an existing license unless the user explicitly requests a change. A no-commercial-use requirement is source-available or proprietary, not OSI open source.
 
 When multiple languages are requested, create a complete README for each language, add a compact switcher below the badges, and declare every file under `readme.locales`. Keep the same screenshots, download URLs, section order, and catalog markers across translations.
 

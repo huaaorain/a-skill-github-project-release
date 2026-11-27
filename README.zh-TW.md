@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-0.2.0-ff7a45?style=flat-square" alt="版本 0.2.0">
+  <img src="https://img.shields.io/badge/version-0.2.1-ff7a45?style=flat-square" alt="版本 0.2.1">
   <img src="https://img.shields.io/badge/python-3.10%2B-3776ab?style=flat-square&logo=python&logoColor=white" alt="Python 3.10+">
   <img src="https://img.shields.io/badge/platform-GitHub-111816?style=flat-square&logo=github&logoColor=white" alt="GitHub">
   <img src="https://img.shields.io/badge/policy-release--only-c5f36b?style=flat-square" alt="僅限 Release">
@@ -99,6 +99,14 @@
       <td>為非必要的登入、模型或擴充功能統一加上 <code>*</code> 標記，並說明它們不影響核心功能。</td>
     </tr>
     <tr>
+      <td><strong>秘&#8239;密&#8239;掃&#8239;描</strong></td>
+      <td>推送前掃描原始碼、未追蹤檔案、未推送歷史與 Release ZIP，發現憑證檔案或常見密鑰格式時阻止上傳。</td>
+    </tr>
+    <tr>
+      <td><strong>授&#8239;權&#8239;選&#8239;擇</strong></td>
+      <td>首次公開上傳前列出常用開源與來源可見授權，說明商用限制並由使用者自行選擇。</td>
+    </tr>
+    <tr>
       <td><strong>失&#8239;敗&#8239;恢&#8239;復</strong></td>
       <td>Draft 附件上傳失敗後可續傳；禁止覆蓋標籤、強制推送或偽造成功。</td>
     </tr>
@@ -150,7 +158,7 @@ $a-skill-github-project-release
 也可以指定場景：
 
 ```text
-使用 $a-skill-github-project-release 為 v0.2.0 建立 Draft Release。
+使用 $a-skill-github-project-release 為 v0.2.1 建立 Draft Release。
 使用 $a-skill-github-project-release 更新 README 與三語版本目錄。
 使用 $a-skill-github-project-release 為 Release 產生三語摺疊說明。
 使用 $a-skill-github-project-release 只更新既有 Release 的說明，不修改附件。
@@ -208,10 +216,12 @@ a-skill-github-project-release/
 - 自動截圖取決於專案是否提供可安全執行的展示模式。
 - 無法只靠程式差異完整推斷使用者影響，版本說明仍需要一次人工檢查。
 - GitHub 單一 Release 附件通常不能超過 2 GiB。
-- 目前倉庫尚未宣告開源授權。
+- 安全檢查只能發現常見模式，無法證明倉庫絕對沒有密鑰；二進位檔、截圖和外部服務仍需人工複核。
+- 本專案禁止商業用途；商用需要另行取得授權。
 
 ## 📝 更新記錄
 
+- [0.2.1：上傳前安全檢查、授權選擇與 PolyForm 非商業授權](docs/releases/v0.2.1.zh-TW.md)
 - [0.2.0：版本顯示位置預檢與可選功能標記](docs/releases/v0.2.0.zh-TW.md)
 - [0.1.2：語意圖示、關鍵優勢與穩定的章節導覽](docs/releases/v0.1.2.zh-TW.md)
 - [0.1.1：三語摺疊 Release 說明與統一檔案表](docs/releases/v0.1.1.zh-TW.md)
@@ -290,4 +300,6 @@ a-skill-github-project-release/
 
 ## 📄 License
 
-目前倉庫尚未指定開源授權。在加入授權前，請勿直接將此 skill 作為商業或再發佈專案的一部分使用。
+本專案採用 [PolyForm Noncommercial License 1.0.0](LICENSE)。它允許非商業使用、修改與分發，並要求保留授權條款及 `Required Notice` 署名；商業用途需要另行取得授權。
+
+這是**來源可見（source-available）授權，不是 OSI 開源授權**。完整條款以 [LICENSE](LICENSE) 為準。

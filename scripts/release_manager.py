@@ -25,6 +25,7 @@ from pathlib import Path
 API_ROOT = "https://api.github.com"
 UPLOAD_HOST = "uploads.github.com"
 MAX_ASSET_SIZE = 2 * 1024**3
+MAX_TEXT_SCAN_SIZE = 16 * 1024 * 1024
 CATALOG_START = "<!-- release-catalog:start -->"
 CATALOG_END = "<!-- release-catalog:end -->"
 DEFAULT_CATALOG_LABELS = {
@@ -49,13 +50,125 @@ DEFAULT_EXCLUDES = (
     "*.pyc",
     "*.pyo",
 )
-SECRET_PATTERNS = (
-    re.compile(r"\bghp_[A-Za-z0-9]{30,}\b"),
-    re.compile(r"\bgithub_pat_[A-Za-z0-9_]{30,}\b"),
-    re.compile(r"\bAKIA[0-9A-Z]{16}\b"),
-    re.compile(r"\bsk-[A-Za-z0-9]{20,}\b"),
-    re.compile(r"-----BEGIN (?:RSA |OPENSSH |EC |DSA )?PRIVATE KEY-----"),
+SENSITIVE_FILE_PATTERNS = (
+    ".env",
+    ".env.*",
+    "*.pem",
+    "*.key",
+    "*.p12",
+    "*.pfx",
+    "*.jks",
+    "*.keystore",
+    "*.kdbx",
+    ".netrc",
+    ".npmrc",
+    ".pypirc",
+    "id_rsa",
+    "id_dsa",
+    "id_ecdsa",
+    "id_ed25519",
+    "*github-auth*",
+    "*github-token*",
+    "*github_token*",
+    "*credential*",
+    "*secret*",
 )
+SAFE_SENSITIVE_TEMPLATES = (
+    ".env.example",
+    ".env.sample",
+    ".env.template",
+    ".env.*.example",
+    ".env.*.sample",
+    ".env.*.template",
+    "*.example.env",
+    "*.sample.env",
+    "*.template.env",
+    "*.example.json",
+    "*.sample.json",
+    "*.template.json",
+)
+SECRET_PATTERNS = (
+    (
+        "private-key",
+        re.compile("-----BEGIN " + r"(?:RSA |OPENSSH |EC |DSA )?" + "PRIVATE KEY-----"),
+    ),
+    ("github-token", re.compile(r"\bgh[pousr]_[A-Za-z0-9]{30,}\b")),
+    ("github-fine-grained-token", re.compile("github" + r"_pat_[A-Za-z0-9_]{30,}")),
+    ("aws-access-key", re.compile(r"\b(?:AKIA|ASIA)[0-9A-Z]{16}\b")),
+    ("openai-key", re.compile(r"\bsk-[A-Za-z0-9_-]{20,}\b")),
+    ("anthropic-key", re.compile(r"\bsk-ant-[A-Za-z0-9_-]{20,}\b")),
+    ("google-api-key", re.compile(r"\bAIza[0-9A-Za-z_-]{35}\b")),
+    ("slack-token", re.compile(r"\bxox[baprs]-[A-Za-z0-9-]{20,}\b")),
+    ("stripe-secret-key", re.compile(r"\bsk_live_[A-Za-z0-9]{20,}\b")),
+    (
+        "credential-assignment",
+        re.compile(
+            r"\b(?:password|passwd|pwd|secret|api[_-]?key|access[_-]?token|auth[_-]?token)"
+            r"\b\s*[:=]\s*[\"']?([^\s\"'#,;]{8,})",
+            re.IGNORECASE,
+        ),
+    ),
+)
+TEXT_FILE_SUFFIXES = {
+    ".bat",
+    ".c",
+    ".cfg",
+    ".cmd",
+    ".conf",
+    ".cpp",
+    ".cs",
+    ".css",
+    ".csv",
+    ".env",
+    ".go",
+    ".gradle",
+    ".h",
+    ".hpp",
+    ".htm",
+    ".html",
+    ".ini",
+    ".java",
+    ".js",
+    ".json",
+    ".jsx",
+    ".md",
+    ".properties",
+    ".ps1",
+    ".py",
+    ".rs",
+    ".sh",
+    ".svg",
+    ".toml",
+    ".ts",
+    ".tsx",
+    ".txt",
+    ".xml",
+    ".yaml",
+    ".yml",
+}
+PLACEHOLDER_VALUES = {
+    "api_key",
+    "apikey",
+    "access_token",
+    "auth_token",
+    "changeme",
+    "example",
+    "fake",
+    "gh_token",
+    "github_token",
+    "password",
+    "passwd",
+    "placeholder",
+    "pwd",
+    "redacted",
+    "replace_me",
+    "sample",
+    "secret",
+    "test",
+    "token",
+    "your_password",
+    "your_token",
+}
 
 
 class ReleaseError(RuntimeError):
@@ -880,26 +993,189 @@ def render_notes(args: argparse.Namespace) -> None:
     print(output)
 
 
-def scan_tracked_secrets(root: Path) -> list[str]:
-    result = run(["git", "-C", str(root), "ls-files", "-z"], check=False)
-    if result.returncode != 0:
+def sensitive_path_label(relative: str) -> str | None:
+    name = Path(relative).name.lower()
+    if any(fnmatch.fnmatch(name, pattern) for pattern in SAFE_SENSITIVE_TEMPLATES):
+        return None
+    if any(
+        fnmatch.fnmatch(name, pattern) or fnmatch.fnmatch(relative.lower(), pattern)
+        for pattern in SENSITIVE_FILE_PATTERNS
+    ):
+        return "credential-file"
+    return None
+
+
+def secret_labels(text: str) -> set[str]:
+    findings: set[str] = set()
+    for label, pattern in SECRET_PATTERNS:
+        for match in pattern.finditer(text):
+            if label == "credential-assignment":
+                value = match.group(1).strip().strip("\"'").lower()
+                if (
+                    not value
+                    or value in PLACEHOLDER_VALUES
+                    or any(marker in value for marker in ("${", "{{", "{", "}", "<", ">", "***", "xxx"))
+                    or value.startswith(("os.environ", "process.env", "env."))
+                ):
+                    continue
+            findings.add(label)
+    return findings
+
+
+def scan_file(path: Path, label: str) -> list[str]:
+    if not path.is_file():
         return []
     findings: list[str] = []
-    for relative in result.stdout.split("\0"):
+    path_label = sensitive_path_label(label)
+    if path_label:
+        findings.append(f"{label}:{path_label}")
+    if path.stat().st_size > MAX_TEXT_SCAN_SIZE:
+        if path.suffix.lower() in TEXT_FILE_SUFFIXES:
+            findings.append(f"{label}:large-text-file")
+        return findings
+    try:
+        payload = path.read_bytes()
+    except OSError:
+        return findings
+    if b"\0" in payload:
+        return findings
+    text = payload.decode("utf-8", errors="ignore")
+    findings.extend(f"{label}:{secret_label}" for secret_label in secret_labels(text))
+    return findings
+
+
+def scan_release_artifact(path: Path, label: str) -> list[str]:
+    findings = scan_file(path, label)
+    if path.suffix.lower() != ".zip":
+        return findings
+    try:
+        with zipfile.ZipFile(path) as archive:
+            for info in archive.infolist():
+                if info.is_dir():
+                    continue
+                entry_label = f"{label}!{info.filename}"
+                entry_path_label = sensitive_path_label(info.filename)
+                if entry_path_label:
+                    findings.append(f"{entry_label}:{entry_path_label}")
+                if info.file_size > MAX_TEXT_SCAN_SIZE:
+                    if Path(info.filename).suffix.lower() in TEXT_FILE_SUFFIXES:
+                        findings.append(f"{entry_label}:large-text-file")
+                    continue
+                payload = archive.read(info)
+                if b"\0" in payload:
+                    continue
+                text = payload.decode("utf-8", errors="ignore")
+                findings.extend(
+                    f"{entry_label}:{secret_label}" for secret_label in secret_labels(text)
+                )
+    except (OSError, zipfile.BadZipFile):
+        pass
+    return findings
+
+
+def scan_outgoing_git_history(root: Path) -> list[str]:
+    result = run(
+        [
+            "git",
+            "-C",
+            str(root),
+            "log",
+            "--all",
+            "--not",
+            "--remotes",
+            "--patch",
+            "--unified=0",
+            "--no-ext-diff",
+            "--text",
+        ],
+        check=False,
+        text=False,
+    )
+    if result.returncode != 0:
+        return []
+    text = result.stdout.decode("utf-8", errors="ignore")
+    return [f"outgoing-git-history:{label}" for label in secret_labels(text)]
+
+
+def security_audit(
+    root: Path,
+    artifacts: list[dict] | None = None,
+    extra_paths: list[Path] | None = None,
+    *,
+    include_history: bool = True,
+) -> tuple[list[str], int]:
+    result = run(
+        [
+            "git",
+            "-C",
+            str(root),
+            "ls-files",
+            "--cached",
+            "--others",
+            "--exclude-standard",
+            "-z",
+        ],
+        check=False,
+        text=False,
+    )
+    if result.returncode != 0:
+        fail(f"Security check requires a Git working tree: {root}")
+    relatives = sorted(
+        {
+            value.decode("utf-8", errors="replace")
+            for value in result.stdout.split(b"\0")
+            if value
+        }
+    )
+    findings: list[str] = []
+    for relative in relatives:
         if not relative:
             continue
         path = root / relative
-        if not path.is_file() or path.stat().st_size > 2 * 1024 * 1024:
-            continue
         try:
-            text = path.read_text(encoding="utf-8")
-        except (UnicodeDecodeError, OSError):
+            resolved = path.resolve()
+            resolved.relative_to(root)
+        except (OSError, ValueError):
+            findings.append(f"{relative}:path-outside-project")
             continue
-        for pattern in SECRET_PATTERNS:
-            if pattern.search(text):
-                findings.append(relative)
-                break
-    return findings
+        findings.extend(scan_file(resolved, relative))
+    for artifact in artifacts or []:
+        path = Path(artifact["resolved_path"])
+        findings.extend(scan_release_artifact(path, path.relative_to(root).as_posix()))
+    for path in extra_paths or []:
+        try:
+            label = path.resolve().relative_to(root).as_posix()
+        except ValueError:
+            label = str(path)
+        findings.extend(scan_file(path, label))
+    if include_history:
+        findings.extend(scan_outgoing_git_history(root))
+    return sorted(set(findings)), len(relatives)
+
+
+def security_check(args: argparse.Namespace) -> None:
+    if args.spec:
+        root, _, spec = load_spec(args.spec)
+        artifacts = validate_artifact_entries(root, spec)
+    else:
+        root = Path(args.root).expanduser().resolve()
+        if not root.is_dir():
+            fail(f"Project root does not exist: {root}")
+        artifacts = []
+    findings, file_count = security_audit(
+        root,
+        artifacts,
+        include_history=not args.no_history,
+    )
+    if findings:
+        fail(
+            "Security check failed. Rotate any real credential before removing it. Findings: "
+            + "; ".join(findings)
+        )
+    print(
+        f"security-check passed: {file_count} upload candidate file(s), "
+        f"{len(artifacts)} release artifact(s)"
+    )
 
 
 def preflight(args: argparse.Namespace) -> None:
@@ -1027,9 +1303,18 @@ def preflight(args: argparse.Namespace) -> None:
             "Release artifacts are not covered by .gitignore: "
             + ", ".join(untracked_build)
         )
-    secret_files = scan_tracked_secrets(root)
-    if secret_files:
-        fail("Likely secrets found in tracked files: " + ", ".join(secret_files))
+    extra_paths = [
+        notes_path,
+        root / "release-build" / "release-manifest.json",
+        root / "release-build" / "FILE_MANIFEST.md",
+        root / "release-build" / "SHA256SUMS.txt",
+    ]
+    security_findings, _ = security_audit(root, artifacts, extra_paths)
+    if security_findings:
+        fail(
+            "Security check failed. Rotate any real credential before removing it. Findings: "
+            + "; ".join(security_findings)
+        )
     print(f"preflight passed for {tag} with {len(artifacts)} artifact(s)")
 
 
@@ -1425,7 +1710,14 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--output", required=True)
     p.set_defaults(func=render_localized_notes)
 
-    p = sub.add_parser("preflight", help="validate release files, README, notes, and obvious secrets")
+    p = sub.add_parser("security-check", help="scan source, artifacts, and outgoing history for credentials")
+    source_group = p.add_mutually_exclusive_group(required=True)
+    source_group.add_argument("--spec")
+    source_group.add_argument("--root")
+    p.add_argument("--no-history", action="store_true")
+    p.set_defaults(func=security_check)
+
+    p = sub.add_parser("preflight", help="validate release files, README, notes, versions, and security")
     p.add_argument("--spec", required=True)
     p.add_argument("--tag", required=True)
     p.add_argument("--notes", required=True)

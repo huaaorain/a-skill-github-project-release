@@ -9,16 +9,18 @@ Use this order so the tag, source commit, built artifacts, README, and release b
 3. Capture or select real feature images and place them under `docs/assets/`.
 4. Update README, installation instructions, compatibility notes, the surface-level download information, and every `version_surfaces` entry.
 5. Create or update `.github/release-spec.json` with every release artifact, its role, description, required status, and stable download filename.
-6. Update README and ensure `release-build/` is ignored.
-7. Commit the source, documentation, screenshots, and release spec.
-8. Push the branch and verify the remote commit.
-9. From that exact commit, run `manifest`, `context`, `render-notes`, and `preflight`.
-10. If preflight requires source changes, commit and push again, then regenerate the manifest.
-11. Create and push an annotated tag on the manifest's commit.
-12. Create a Draft Release with all assets.
-13. Verify the draft and request approval to publish.
-14. Publish, then regenerate the README's all-version catalog.
-15. Review the catalog diff, commit only the generated catalog change, and push it.
+6. Confirm the license is present and matches the user's choice. If none exists, stop and use `license-selection.md`.
+7. Update README and ensure `release-build/` is ignored.
+8. Run `security-check --spec .github/release-spec.json`; stop on any real finding and rotate the credential.
+9. Commit the source, documentation, screenshots, and release spec.
+10. Push the branch and verify the remote commit.
+11. From that exact commit, run `manifest`, `context`, `render-notes`, and `preflight`.
+12. If preflight requires source changes, commit and push again, then regenerate the manifest.
+13. Create and push an annotated tag on the manifest's commit.
+14. Create a Draft Release with all assets.
+15. Verify the draft and request approval to publish.
+16. Publish, then regenerate the README's all-version catalog.
+17. Review the catalog diff, commit only the generated catalog change, and push it.
 
 ## Artifact policy
 
@@ -54,6 +56,8 @@ When `release_notes.locales` exists, update every localized source file and gene
 Before publishing:
 
 - all required artifacts exist and are regular files;
+- the pre-commit security check passed and no real credential remains;
+- the license is present and the user explicitly chose it;
 - no artifact is tracked by Git;
 - no asset exceeds GitHub's per-file limit;
 - every file has a useful description;

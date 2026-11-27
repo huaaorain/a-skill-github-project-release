@@ -161,4 +161,5 @@ See [CHANGELOG.md](CHANGELOG.md) and the Releases page.
 
 ## 📄 License
 
+<!-- Preserve the existing license or use references/license-selection.md to ask the user. -->
 {{LICENSE_STATUS}}

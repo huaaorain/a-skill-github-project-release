@@ -1,5 +1,22 @@
 # Changelog
 
+## [0.2.1] - 2026-11-27
+
+### Added
+
+- A `security-check` command that scans tracked, staged, untracked, outgoing
+  Git-history, and ZIP artifact content for credential files and common token
+  or password formats without printing matched values.
+- Mandatory license-selection guidance covering common OSI licenses and
+  source-available noncommercial alternatives.
+- The project is now distributed under PolyForm Noncommercial License 1.0.0
+  with a Required Notice attribution.
+
+### Changed
+
+- Preflight now runs the expanded security audit instead of checking only a
+  small set of tracked-file token patterns.
+
 ## [0.2.0] - 2026-11-20
 
 ### Changed

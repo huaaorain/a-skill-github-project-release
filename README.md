@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-0.2.0-ff7a45?style=flat-square" alt="Version 0.2.0">
+  <img src="https://img.shields.io/badge/version-0.2.1-ff7a45?style=flat-square" alt="Version 0.2.1">
   <img src="https://img.shields.io/badge/python-3.10%2B-3776ab?style=flat-square&logo=python&logoColor=white" alt="Python 3.10+">
   <img src="https://img.shields.io/badge/platform-GitHub-111816?style=flat-square&logo=github&logoColor=white" alt="GitHub">
   <img src="https://img.shields.io/badge/policy-release--only-c5f36b?style=flat-square" alt="Release-only">
@@ -97,6 +97,14 @@
     <tr>
       <td><strong>可&#8239;选&#8239;标&#8239;记</strong></td>
       <td>为非必需的登录、模型或扩展功能统一添加 <code>*</code> 标记，并说明它们不影响核心功能。</td>
+    </tr>
+    <tr>
+      <td><strong>秘&#8239;密&#8239;扫&#8239;描</strong></td>
+      <td>推送前扫描源码、未跟踪文件、未推送历史和 Release ZIP，发现凭据文件或常见密钥格式时阻止上传。</td>
+    </tr>
+    <tr>
+      <td><strong>协&#8239;议&#8239;选&#8239;择</strong></td>
+      <td>首次公开上传前列出常用开源与来源可见协议，解释商用限制并由用户自行选择。</td>
     </tr>
     <tr>
       <td><strong>失&#8239;败&#8239;恢&#8239;复</strong></td>
@@ -211,10 +219,12 @@ a-skill-github-project-release/
 - 自动截图取决于项目是否提供可安全运行的演示模式。
 - 无法根据代码 diff 完全推断产品影响，发布说明仍需一次人工审核。
 - GitHub 单个 Release 附件通常不能超过 2 GiB。
-- 当前仓库尚未声明开源许可证。
+- 安全检查只能发现常见模式，无法证明仓库绝对没有密钥；二进制、截图和外部服务仍需人工复核。
+- 本项目禁止商业用途；商用需要另行取得授权。
 
 ## 📝 更新记录
 
+- [0.2.1：上传前安全检查、许可证选择与 PolyForm 非商业许可](docs/releases/v0.2.1.zh-CN.md)
 - [0.2.0：版本显示位预检与可选功能标记](docs/releases/v0.2.0.zh-CN.md)
 - [0.1.2：语义图标、关键优势与稳定的章节导航](docs/releases/v0.1.2.zh-CN.md)
 - [0.1.1：三语折叠 Release 说明与统一文件表](docs/releases/v0.1.1.zh-CN.md)
@@ -293,4 +303,6 @@ a-skill-github-project-release/
 
 ## 📄 License
 
-当前仓库尚未指定开源许可证。在添加许可证前，请勿直接将此 skill 作为商业或再分发项目的一部分使用。
+本项目采用 [PolyForm Noncommercial License 1.0.0](LICENSE)。它允许非商业使用、修改和分发，并要求保留许可证及 `Required Notice` 署名；商业用途需要另行取得授权。
+
+这是**来源可见（source-available）许可证，不是 OSI 开源许可证**。完整条款以 [LICENSE](LICENSE) 为准。

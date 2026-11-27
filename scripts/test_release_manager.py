@@ -12,6 +12,7 @@ import subprocess
 import sys
 import unittest
 import uuid
+import zipfile
 from pathlib import Path
 from unittest import mock
 
@@ -265,6 +266,53 @@ class ReleaseManagerSmokeTests(unittest.TestCase):
         self.assertNotEqual(result.returncode, 0)
         self.assertIn("Version surface is stale", result.stderr)
         self.assertIn("expected 0.1.0, found 0.0.9", result.stderr)
+
+    def test_security_check_rejects_source_secret_without_echoing_it(self) -> None:
+        secret = "gh" + "p_" + "A" * 36
+        (self.root / "src" / "settings.txt").write_text(
+            f'api_key = "{secret}"\n',
+            encoding="utf-8",
+        )
+        result = self.cli(
+            "security-check",
+            "--spec",
+            str(self.spec_path),
+            check=False,
+        )
+        output = result.stdout + result.stderr
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("Security check failed", output)
+        self.assertIn("github-token", output)
+        self.assertNotIn(secret, output)
+
+    def test_security_check_allows_placeholder_env_example(self) -> None:
+        (self.root / ".env.example").write_text(
+            "API_KEY=${API_KEY}\nPASSWORD=<your-password>\n",
+            encoding="utf-8",
+        )
+        result = self.cli(
+            "security-check",
+            "--spec",
+            str(self.spec_path),
+            check=False,
+        )
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn("security-check passed", result.stdout)
+
+    def test_security_check_inspects_release_archive(self) -> None:
+        secret = "gh" + "p_" + "B" * 36
+        with zipfile.ZipFile(self.root / "release-build" / "demo.zip", "w") as archive:
+            archive.writestr("config/.env", f"GITHUB_TOKEN={secret}\n")
+        result = self.cli(
+            "security-check",
+            "--spec",
+            str(self.spec_path),
+            check=False,
+        )
+        output = result.stdout + result.stderr
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("demo.zip!config/.env", output)
+        self.assertNotIn(secret, output)
 
     def test_catalog_updates_only_marker_block(self) -> None:
         releases = [

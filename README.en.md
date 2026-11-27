@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-0.2.0-ff7a45?style=flat-square" alt="Version 0.2.0">
+  <img src="https://img.shields.io/badge/version-0.2.1-ff7a45?style=flat-square" alt="Version 0.2.1">
   <img src="https://img.shields.io/badge/python-3.10%2B-3776ab?style=flat-square&logo=python&logoColor=white" alt="Python 3.10+">
   <img src="https://img.shields.io/badge/platform-GitHub-111816?style=flat-square&logo=github&logoColor=white" alt="GitHub">
   <img src="https://img.shields.io/badge/policy-release--only-c5f36b?style=flat-square" alt="Release-only">
@@ -99,6 +99,14 @@ Publishing a finished project spans Git commits, build outputs, Release assets, 
       <td>Marks non-required login, model, or extension capabilities with <code>*</code> and explains that core features work without them.</td>
     </tr>
     <tr>
+      <td><strong>Security&#8239;scan</strong></td>
+      <td>Scans source, untracked files, outgoing history, and Release ZIPs for credential files and common secret formats before upload.</td>
+    </tr>
+    <tr>
+      <td><strong>License&#8239;choice</strong></td>
+      <td>Presents common open-source and source-available licenses, explains commercial restrictions, and requires an explicit user choice.</td>
+    </tr>
+    <tr>
       <td><strong>Recovery</strong></td>
       <td>Resumes Draft asset uploads and refuses to fake success through force-pushes, moved tags, or overwritten releases.</td>
     </tr>
@@ -150,7 +158,7 @@ Use $a-skill-github-project-release to publish this project to GitHub.
 Common scoped requests:
 
 ```text
-Use $a-skill-github-project-release to create a Draft Release for v0.2.0.
+Use $a-skill-github-project-release to create a Draft Release for v0.2.1.
 Use $a-skill-github-project-release to refresh the README and localized release catalogs.
 Use $a-skill-github-project-release to render collapsible multilingual Release notes.
 Use $a-skill-github-project-release to update an existing Release body without changing its assets.
@@ -208,10 +216,12 @@ a-skill-github-project-release/
 - Automatic screenshots require a safe demo mode that the project can run.
 - Code diffs cannot fully determine product impact; release notes still need a review pass.
 - A GitHub Release asset is normally limited to 2 GiB per file.
-- This repository does not currently declare an open-source license.
+- Security scanning detects common patterns but cannot prove a repository is secret-free; binaries, screenshots, and external services still need manual review.
+- Commercial use is prohibited; a separate commercial license is required.
 
 ## 📝 Release history
 
+- [0.2.1: pre-upload security checks, license selection, and PolyForm noncommercial licensing](docs/releases/v0.2.1.en.md)
 - [0.2.0: version surface preflight and optional capability markers](docs/releases/v0.2.0.en.md)
 - [0.1.2: semantic icons, verified advantages, and stable section navigation](docs/releases/v0.1.2.en.md)
 - [0.1.1: collapsible multilingual Release notes and shared file tables](docs/releases/v0.1.1.en.md)
@@ -290,4 +300,6 @@ Release notes: [Open](https://github.com/huaaorain/a-skill-github-project-releas
 
 ## 📄 License
 
-This repository does not currently declare an open-source license. Until a license is added, do not use the skill as part of a commercial or redistributed product.
+This project is licensed under the [PolyForm Noncommercial License 1.0.0](LICENSE). It permits noncommercial use, modification, and distribution and requires preservation of the license and the `Required Notice` attribution. Commercial use requires a separate license.
+
+This is a **source-available license, not an OSI open-source license**. The complete terms in [LICENSE](LICENSE) control.
